@@ -1,0 +1,67 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myBreakpointLabel" jhiTranslate="swarmServerApp.breakpoint.home.createOrEditLabel">Create or edit a Breakpoint</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!breakpoint.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="breakpoint.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.breakpoint.kind" for="field_kind">Kind</label>
+            <select class="form-control" name="kind" [(ngModel)]="breakpoint.kind" id="field_kind" >
+                <option value="LINE">{{'swarmServerApp.BreakpointKind.LINE' | translate}}</option>
+                <option value="CONDITIONAL">{{'swarmServerApp.BreakpointKind.CONDITIONAL' | translate}}</option>
+                <option value="EXCEPTION">{{'swarmServerApp.BreakpointKind.EXCEPTION' | translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.breakpoint.namespace" for="field_namespace">Namespace</label>
+            <input type="text" class="form-control" name="namespace" id="field_namespace"
+                [(ngModel)]="breakpoint.namespace"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.breakpoint.type" for="field_type">Type</label>
+            <input type="text" class="form-control" name="type" id="field_type"
+                [(ngModel)]="breakpoint.type"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.breakpoint.lineNumber" for="field_lineNumber">Line Number</label>
+            <input type="number" class="form-control" name="lineNumber" id="field_lineNumber"
+                [(ngModel)]="breakpoint.lineNumber"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.breakpoint.lineOfCode" for="field_lineOfCode">Line Of Code</label>
+            <input type="text" class="form-control" name="lineOfCode" id="field_lineOfCode"
+                [(ngModel)]="breakpoint.lineOfCode"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.breakpoint.created" for="field_created">Created</label>
+            <div class="d-flex">
+                <input id="field_created" type="datetime-local" class="form-control" name="created" [(ngModel)]="breakpoint.created"
+                  />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.breakpoint.session" for="field_session">Session</label>
+            <select class="form-control" id="field_session" name="session" [(ngModel)]="breakpoint.session" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="sessionOption.id === breakpoint.session?.id ? breakpoint.session : sessionOption" *ngFor="let sessionOption of sessions; trackBy: trackSessionById">{{sessionOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

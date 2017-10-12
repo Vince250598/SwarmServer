@@ -1,0 +1,112 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myEventLabel" jhiTranslate="swarmServerApp.event.home.createOrEditLabel">Create or edit a Event</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!event.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="event.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.event.kind" for="field_kind">Kind</label>
+            <select class="form-control" name="kind" [(ngModel)]="event.kind" id="field_kind" >
+                <option value="STEP_OUT">{{'swarmServerApp.EventKind.STEP_OUT' | translate}}</option>
+                <option value="STEP_INTO">{{'swarmServerApp.EventKind.STEP_INTO' | translate}}</option>
+                <option value="STEP_OVER">{{'swarmServerApp.EventKind.STEP_OVER' | translate}}</option>
+                <option value="SUSPEND">{{'swarmServerApp.EventKind.SUSPEND' | translate}}</option>
+                <option value="RESUME">{{'swarmServerApp.EventKind.RESUME' | translate}}</option>
+                <option value="BREAKPOINT_ADD">{{'swarmServerApp.EventKind.BREAKPOINT_ADD' | translate}}</option>
+                <option value="BREAKPOINT_CHANGE">{{'swarmServerApp.EventKind.BREAKPOINT_CHANGE' | translate}}</option>
+                <option value="BREAKPOINT_REMOVE">{{'swarmServerApp.EventKind.BREAKPOINT_REMOVE' | translate}}</option>
+                <option value="SUSPEND_BREAKPOINT">{{'swarmServerApp.EventKind.SUSPEND_BREAKPOINT' | translate}}</option>
+                <option value="INSPECT_VARIABLE">{{'swarmServerApp.EventKind.INSPECT_VARIABLE' | translate}}</option>
+                <option value="MODIFY_VARIABLE">{{'swarmServerApp.EventKind.MODIFY_VARIABLE' | translate}}</option>
+                <option value="DEFINE_WATCH">{{'swarmServerApp.EventKind.DEFINE_WATCH' | translate}}</option>
+                <option value="EVALUATE_EXPRESSION">{{'swarmServerApp.EventKind.EVALUATE_EXPRESSION' | translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.event.detail" for="field_detail">Detail</label>
+            <input type="text" class="form-control" name="detail" id="field_detail"
+                [(ngModel)]="event.detail"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.event.namespace" for="field_namespace">Namespace</label>
+            <input type="text" class="form-control" name="namespace" id="field_namespace"
+                [(ngModel)]="event.namespace"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.event.type" for="field_type">Type</label>
+            <input type="text" class="form-control" name="type" id="field_type"
+                [(ngModel)]="event.type"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.event.typeFullPath" for="field_typeFullPath">Type Full Path</label>
+            <input type="text" class="form-control" name="typeFullPath" id="field_typeFullPath"
+                [(ngModel)]="event.typeFullPath"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.event.method" for="field_method">Method</label>
+            <input type="text" class="form-control" name="method" id="field_method"
+                [(ngModel)]="event.method"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.event.methodKey" for="field_methodKey">Method Key</label>
+            <input type="text" class="form-control" name="methodKey" id="field_methodKey"
+                [(ngModel)]="event.methodKey"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.event.methodSignature" for="field_methodSignature">Method Signature</label>
+            <input type="text" class="form-control" name="methodSignature" id="field_methodSignature"
+                [(ngModel)]="event.methodSignature"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.event.charStar" for="field_charStar">Char Star</label>
+            <input type="number" class="form-control" name="charStar" id="field_charStar"
+                [(ngModel)]="event.charStar"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.event.charEnd" for="field_charEnd">Char End</label>
+            <input type="number" class="form-control" name="charEnd" id="field_charEnd"
+                [(ngModel)]="event.charEnd"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.event.lineNumber" for="field_lineNumber">Line Number</label>
+            <input type="number" class="form-control" name="lineNumber" id="field_lineNumber"
+                [(ngModel)]="event.lineNumber"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.event.lineOfCode" for="field_lineOfCode">Line Of Code</label>
+            <input type="text" class="form-control" name="lineOfCode" id="field_lineOfCode"
+                [(ngModel)]="event.lineOfCode"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.event.created" for="field_created">Created</label>
+            <div class="d-flex">
+                <input id="field_created" type="datetime-local" class="form-control" name="created" [(ngModel)]="event.created"
+                  />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.event.session" for="field_session">Session</label>
+            <select class="form-control" id="field_session" name="session" [(ngModel)]="event.session" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="sessionOption.id === event.session?.id ? event.session : sessionOption" *ngFor="let sessionOption of sessions; trackBy: trackSessionById">{{sessionOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

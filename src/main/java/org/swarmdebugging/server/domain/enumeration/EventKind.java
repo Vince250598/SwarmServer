@@ -1,0 +1,8 @@
+package org.swarmdebugging.server.domain.enumeration;
+
+/**
+ * The EventKind enumeration.
+ */
+public enum EventKind {
+    STEP_OUT, STEP_INTO, STEP_OVER, SUSPEND, RESUME, BREAKPOINT_ADD, BREAKPOINT_CHANGE, BREAKPOINT_REMOVE, SUSPEND_BREAKPOINT, INSPECT_VARIABLE, MODIFY_VARIABLE, DEFINE_WATCH, EVALUATE_EXPRESSION
+}

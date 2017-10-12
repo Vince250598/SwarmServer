@@ -1,0 +1,87 @@
+<div>
+    <h2>
+        <span jhiTranslate="swarmServerApp.pathNode.home.title">Path Nodes</span>
+        <button class="btn btn-primary float-right jh-create-entity create-path-node" [routerLink]="['/', { outlets: { popup: ['path-node-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down"  jhiTranslate="swarmServerApp.pathNode.home.createLabel">
+            Create new Path Node
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'swarmServerApp.pathNode.home.search' | translate }}">
+                    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="pathNodes">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="swarmServerApp.pathNode.namespace">Namespace</span></th>
+            <th><span jhiTranslate="swarmServerApp.pathNode.type">Type</span></th>
+            <th><span jhiTranslate="swarmServerApp.pathNode.method">Method</span></th>
+            <th><span jhiTranslate="swarmServerApp.pathNode.created">Created</span></th>
+            <th><span jhiTranslate="swarmServerApp.pathNode.origin">Origin</span></th>
+            <th><span jhiTranslate="swarmServerApp.pathNode.session">Session</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let pathNode of pathNodes ;trackBy: trackId">
+                <td><a [routerLink]="['../path-node', pathNode.id ]">{{pathNode.id}}</a></td>
+                <td>{{pathNode.namespace}}</td>
+                <td>{{pathNode.type}}</td>
+                <td>{{pathNode.method}}</td>
+                <td>{{pathNode.created | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="pathNode.origin">
+                        <a [routerLink]="['../path-node', pathNode.origin?.id ]" >{{pathNode.origin?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="pathNode.session">
+                        <a [routerLink]="['../session', pathNode.session?.id ]" >{{pathNode.session?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../path-node', pathNode.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'path-node/'+ pathNode.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'path-node/'+ pathNode.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

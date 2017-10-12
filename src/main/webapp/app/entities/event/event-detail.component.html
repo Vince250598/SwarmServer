@@ -1,0 +1,79 @@
+
+<div *ngIf="event">
+    <h2><span jhiTranslate="swarmServerApp.event.detail.title">Event</span> {{event.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="swarmServerApp.event.kind">Kind</span></dt>
+        <dd>
+            <span jhiTranslate="{{'swarmServerApp.EventKind.' + event.kind}}">{{event.kind}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.event.detail">Detail</span></dt>
+        <dd>
+            <span>{{event.detail}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.event.namespace">Namespace</span></dt>
+        <dd>
+            <span>{{event.namespace}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.event.type">Type</span></dt>
+        <dd>
+            <span>{{event.type}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.event.typeFullPath">Type Full Path</span></dt>
+        <dd>
+            <span>{{event.typeFullPath}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.event.method">Method</span></dt>
+        <dd>
+            <span>{{event.method}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.event.methodKey">Method Key</span></dt>
+        <dd>
+            <span>{{event.methodKey}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.event.methodSignature">Method Signature</span></dt>
+        <dd>
+            <span>{{event.methodSignature}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.event.charStar">Char Star</span></dt>
+        <dd>
+            <span>{{event.charStar}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.event.charEnd">Char End</span></dt>
+        <dd>
+            <span>{{event.charEnd}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.event.lineNumber">Line Number</span></dt>
+        <dd>
+            <span>{{event.lineNumber}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.event.lineOfCode">Line Of Code</span></dt>
+        <dd>
+            <span>{{event.lineOfCode}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.event.created">Created</span></dt>
+        <dd>
+            <span>{{event.created | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.event.session">Session</span></dt>
+        <dd>
+            <div *ngIf="event.session">
+                <a [routerLink]="['/session', event.session?.id]">{{event.session?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'event/'+ event.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

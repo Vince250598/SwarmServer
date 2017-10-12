@@ -1,0 +1,28 @@
+{
+    "swarmServerApp": {
+        "breakpoint" : {
+            "home": {
+                "title": "Breakpoints",
+                "createLabel": "Créer un nouveau Breakpoint",
+                "createOrEditLabel": "Créer ou éditer un Breakpoint",
+                "search": "Recherche pour Breakpoint"
+            },
+            "created": "Un nouveau Breakpoint a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Breakpoint avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Breakpoint avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Breakpoint {{ id }} ?"
+            },
+            "detail": {
+                "title": "Breakpoint"
+            },
+            "kind": "Kind",
+            "namespace": "Namespace",
+            "type": "Type",
+            "lineNumber": "Line Number",
+            "lineOfCode": "Line Of Code",
+            "created": "Created",
+            "session": "Session"
+        }
+    }
+}

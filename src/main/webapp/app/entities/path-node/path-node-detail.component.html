@@ -1,0 +1,49 @@
+
+<div *ngIf="pathNode">
+    <h2><span jhiTranslate="swarmServerApp.pathNode.detail.title">Path Node</span> {{pathNode.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="swarmServerApp.pathNode.namespace">Namespace</span></dt>
+        <dd>
+            <span>{{pathNode.namespace}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.pathNode.type">Type</span></dt>
+        <dd>
+            <span>{{pathNode.type}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.pathNode.method">Method</span></dt>
+        <dd>
+            <span>{{pathNode.method}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.pathNode.created">Created</span></dt>
+        <dd>
+            <span>{{pathNode.created | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.pathNode.origin">Origin</span></dt>
+        <dd>
+            <div *ngIf="pathNode.origin">
+                <a [routerLink]="['/path-node', pathNode.origin?.id]">{{pathNode.origin?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.pathNode.session">Session</span></dt>
+        <dd>
+            <div *ngIf="pathNode.session">
+                <a [routerLink]="['/session', pathNode.session?.id]">{{pathNode.session?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'path-node/'+ pathNode.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

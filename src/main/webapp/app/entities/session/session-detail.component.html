@@ -1,0 +1,53 @@
+
+<div *ngIf="session">
+    <h2><span jhiTranslate="swarmServerApp.session.detail.title">Session</span> {{session.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="swarmServerApp.session.label">Label</span></dt>
+        <dd>
+            <span>{{session.label}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.session.description">Description</span></dt>
+        <dd>
+            <span>{{session.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.session.purpose">Purpose</span></dt>
+        <dd>
+            <span>{{session.purpose}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.session.started">Started</span></dt>
+        <dd>
+            <span>{{session.started | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.session.finished">Finished</span></dt>
+        <dd>
+            <span>{{session.finished | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.session.task">Task</span></dt>
+        <dd>
+            <div *ngIf="session.task">
+                <a [routerLink]="['/task', session.task?.id]">{{session.task?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.session.developer">Developer</span></dt>
+        <dd>
+            <div *ngIf="session.developer">
+                <a [routerLink]="['/developer', session.developer?.id]">{{session.developer?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'session/'+ session.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

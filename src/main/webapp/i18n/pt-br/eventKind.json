@@ -1,0 +1,20 @@
+{
+    "swarmServerApp": {
+        "EventKind" : {
+            "null": "",
+            "STEP_OUT": "STEP_OUT",
+            "STEP_INTO": "STEP_INTO",
+            "STEP_OVER": "STEP_OVER",
+            "SUSPEND": "SUSPEND",
+            "RESUME": "RESUME",
+            "BREAKPOINT_ADD": "BREAKPOINT_ADD",
+            "BREAKPOINT_CHANGE": "BREAKPOINT_CHANGE",
+            "BREAKPOINT_REMOVE": "BREAKPOINT_REMOVE",
+            "SUSPEND_BREAKPOINT": "SUSPEND_BREAKPOINT",
+            "INSPECT_VARIABLE": "INSPECT_VARIABLE",
+            "MODIFY_VARIABLE": "MODIFY_VARIABLE",
+            "DEFINE_WATCH": "DEFINE_WATCH",
+            "EVALUATE_EXPRESSION": "EVALUATE_EXPRESSION"
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "swarmServerApp": {
+        "BreakpointKind" : {
+            "null": "",
+            "LINE": "LINE",
+            "CONDITIONAL": "CONDITIONAL",
+            "EXCEPTION": "EXCEPTION"
+        }
+    }
+}

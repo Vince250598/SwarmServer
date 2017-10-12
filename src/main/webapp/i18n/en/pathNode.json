@@ -1,0 +1,28 @@
+{
+    "swarmServerApp": {
+        "pathNode" : {
+            "home": {
+                "title": "Path Nodes",
+                "createLabel": "Create a new Path Node",
+                "createOrEditLabel": "Create or edit a Path Node",
+                "search": "Search for Path Node"
+            },
+            "created": "A new Path Node is created with identifier {{ param }}",
+            "updated": "A Path Node is updated with identifier {{ param }}",
+            "deleted": "A Path Node is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Path Node {{ id }}?"
+            },
+            "detail": {
+                "title": "Path Node"
+            },
+            "namespace": "Namespace",
+            "type": "Type",
+            "method": "Method",
+            "created": "Created",
+            "origin": "Origin",
+            "destination": "Destination",
+            "session": "Session"
+        }
+    }
+}

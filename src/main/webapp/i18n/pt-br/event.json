@@ -1,0 +1,35 @@
+{
+    "swarmServerApp": {
+        "event" : {
+            "home": {
+                "title": "Events",
+                "createLabel": "Criar novo Event",
+                "createOrEditLabel": "Criar ou editar Event",
+                "search": "Pesquisar por Event"
+            },
+            "created": "Um novo Event foi criado com o identificador {{ param }}",
+            "updated": "Um Event foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Event foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Event {{ id }}?"
+            },
+            "detail": {
+                "title": "Event"
+            },
+            "kind": "Kind",
+            "detail": "Detail",
+            "namespace": "Namespace",
+            "type": "Type",
+            "typeFullPath": "Type Full Path",
+            "method": "Method",
+            "methodKey": "Method Key",
+            "methodSignature": "Method Signature",
+            "charStar": "Char Star",
+            "charEnd": "Char End",
+            "lineNumber": "Line Number",
+            "lineOfCode": "Line Of Code",
+            "created": "Created",
+            "session": "Session"
+        }
+    }
+}

@@ -1,0 +1,81 @@
+
+entity Project {
+	name String
+    description String
+}
+
+entity Task {
+	title String,
+	description String
+}
+
+entity Session {
+	label String
+    description String
+    purpose String
+    started ZonedDateTime
+    finished ZonedDateTime
+}
+
+entity Developer {
+	name String
+}
+
+entity Breakpoint {
+	kind BreakpointKind    
+	namespace String
+	type String
+    lineNumber Integer
+    lineOfCode String
+    created ZonedDateTime
+}
+
+entity Event {
+    kind EventKind
+	detail String
+	namespace String
+	type String
+    typeFullPath String
+	method String
+    methodKey String
+    methodSignature String
+	charStar Integer
+    charEnd  Integer
+    lineNumber Integer
+    lineOfCode String
+    created ZonedDateTime
+}
+
+
+entity PathNode {
+	namespace String
+	type String
+    method String
+    created ZonedDateTime
+}
+
+enum BreakpointKind {
+    LINE, CONDITIONAL, EXCEPTION
+}
+
+enum EventKind {
+    STEP_OUT, STEP_INTO, STEP_OVER, SUSPEND, RESUME, 
+    BREAKPOINT_ADD, BREAKPOINT_CHANGE, 
+    BREAKPOINT_REMOVE, SUSPEND_BREAKPOINT, 
+    INSPECT_VARIABLE, MODIFY_VARIABLE,
+    DEFINE_WATCH,
+    EVALUATE_EXPRESSION
+}
+
+relationship OneToMany {
+	Project{task} to Task{project},
+	Task{session} to Session{task},
+	Developer{session} to Session{developer},
+    Session{segment} to PathNode{session},
+    Session{breakpoint} to Breakpoint{session},
+	Session{event} to Event{session}
+}
+
+relationship OneToOne { 
+	PathNode{origin} to PathNode{destination}
+}

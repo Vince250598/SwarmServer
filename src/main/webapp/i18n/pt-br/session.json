@@ -1,0 +1,31 @@
+{
+    "swarmServerApp": {
+        "session" : {
+            "home": {
+                "title": "Sessions",
+                "createLabel": "Criar novo Session",
+                "createOrEditLabel": "Criar ou editar Session",
+                "search": "Pesquisar por Session"
+            },
+            "created": "Um novo Session foi criado com o identificador {{ param }}",
+            "updated": "Um Session foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Session foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Session {{ id }}?"
+            },
+            "detail": {
+                "title": "Session"
+            },
+            "label": "Label",
+            "description": "Description",
+            "purpose": "Purpose",
+            "started": "Started",
+            "finished": "Finished",
+            "segment": "Segment",
+            "breakpoint": "Breakpoint",
+            "event": "Event",
+            "task": "Task",
+            "developer": "Developer"
+        }
+    }
+}

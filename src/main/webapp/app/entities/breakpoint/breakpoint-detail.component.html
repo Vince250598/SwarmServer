@@ -1,0 +1,51 @@
+
+<div *ngIf="breakpoint">
+    <h2><span jhiTranslate="swarmServerApp.breakpoint.detail.title">Breakpoint</span> {{breakpoint.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="swarmServerApp.breakpoint.kind">Kind</span></dt>
+        <dd>
+            <span jhiTranslate="{{'swarmServerApp.BreakpointKind.' + breakpoint.kind}}">{{breakpoint.kind}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.breakpoint.namespace">Namespace</span></dt>
+        <dd>
+            <span>{{breakpoint.namespace}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.breakpoint.type">Type</span></dt>
+        <dd>
+            <span>{{breakpoint.type}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.breakpoint.lineNumber">Line Number</span></dt>
+        <dd>
+            <span>{{breakpoint.lineNumber}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.breakpoint.lineOfCode">Line Of Code</span></dt>
+        <dd>
+            <span>{{breakpoint.lineOfCode}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.breakpoint.created">Created</span></dt>
+        <dd>
+            <span>{{breakpoint.created | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="swarmServerApp.breakpoint.session">Session</span></dt>
+        <dd>
+            <div *ngIf="breakpoint.session">
+                <a [routerLink]="['/session', breakpoint.session?.id]">{{breakpoint.session?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'breakpoint/'+ breakpoint.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>
