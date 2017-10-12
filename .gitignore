@@ -1,7 +1,6 @@
 /bin/
-/gradlew
-/gradlew.bat
 /gradle/
 /build/
 /.settings/
 /.classpath
+/node_modules

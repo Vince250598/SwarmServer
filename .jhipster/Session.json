@@ -1,0 +1,62 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "segment",
+            "otherEntityName": "pathNode",
+            "otherEntityRelationshipName": "session"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "breakpoint",
+            "otherEntityName": "breakpoint",
+            "otherEntityRelationshipName": "session"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "event",
+            "otherEntityName": "event",
+            "otherEntityRelationshipName": "session"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "task",
+            "otherEntityName": "task",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "developer",
+            "otherEntityName": "developer",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "label",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "purpose",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "started",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "finished",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "changelogDate": "20171012144220",
+    "entityTableName": "session",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

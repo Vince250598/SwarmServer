@@ -1,0 +1,43 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "session",
+            "otherEntityName": "session",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "kind",
+            "fieldType": "BreakpointKind",
+            "fieldValues": "LINE,CONDITIONAL,EXCEPTION"
+        },
+        {
+            "fieldName": "namespace",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lineNumber",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "lineOfCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "created",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "changelogDate": "20171012144222",
+    "entityTableName": "breakpoint",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

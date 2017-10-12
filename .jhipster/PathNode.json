@@ -1,0 +1,49 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "origin",
+            "otherEntityName": "pathNode",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "destination"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "destination",
+            "otherEntityName": "pathNode",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "origin"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "session",
+            "otherEntityName": "session",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "namespace",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "method",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "created",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "changelogDate": "20171012144224",
+    "entityTableName": "path_node",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

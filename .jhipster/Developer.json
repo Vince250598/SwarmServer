@@ -1,0 +1,22 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "session",
+            "otherEntityName": "session",
+            "otherEntityRelationshipName": "developer"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171012144221",
+    "entityTableName": "developer",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

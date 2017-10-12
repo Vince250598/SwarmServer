@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity PathNode.
+    -->
+    <changeSet id="20171012144224-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="origin_id"
+                                 baseTableName="path_node"
+                                 constraintName="fk_path_node_origin_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="path_node"/>
+
+        <addForeignKeyConstraint baseColumnNames="session_id"
+                                 baseTableName="path_node"
+                                 constraintName="fk_path_node_session_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="session"/>
+
+    </changeSet>
+</databaseChangeLog>
