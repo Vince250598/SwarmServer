@@ -11,16 +11,24 @@
             "relationshipType": "many-to-one",
             "relationshipName": "project",
             "otherEntityName": "project",
-            "otherEntityField": "id"
+            "otherEntityField": "name"
         }
     ],
     "fields": [
+        {
+            "fieldName": "tag",
+            "fieldType": "String"
+        },
         {
             "fieldName": "title",
             "fieldType": "String"
         },
         {
             "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "url",
             "fieldType": "String"
         }
     ],

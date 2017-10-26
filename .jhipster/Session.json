@@ -23,13 +23,13 @@
             "relationshipType": "many-to-one",
             "relationshipName": "task",
             "otherEntityName": "task",
-            "otherEntityField": "id"
+            "otherEntityField": "title"
         },
         {
             "relationshipType": "many-to-one",
             "relationshipName": "developer",
             "otherEntityName": "developer",
-            "otherEntityField": "id"
+            "otherEntityField": "name"
         }
     ],
     "fields": [
