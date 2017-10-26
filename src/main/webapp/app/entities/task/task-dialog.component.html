@@ -13,6 +13,11 @@
                    [(ngModel)]="task.id" readonly />
         </div>
         <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.task.tag" for="field_tag">Tag</label>
+            <input type="text" class="form-control" name="tag" id="field_tag"
+                [(ngModel)]="task.tag"  />
+        </div>
+        <div class="form-group">
             <label class="form-control-label" jhiTranslate="swarmServerApp.task.title" for="field_title">Title</label>
             <input type="text" class="form-control" name="title" id="field_title"
                 [(ngModel)]="task.title"  />
@@ -22,12 +27,17 @@
             <input type="text" class="form-control" name="description" id="field_description"
                 [(ngModel)]="task.description"  />
         </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.task.url" for="field_url">Url</label>
+            <input type="text" class="form-control" name="url" id="field_url"
+                [(ngModel)]="task.url"  />
+        </div>
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="swarmServerApp.task.project" for="field_project">Project</label>
             <select class="form-control" id="field_project" name="project" [(ngModel)]="task.project" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="projectOption.id === task.project?.id ? task.project : projectOption" *ngFor="let projectOption of projects; trackBy: trackProjectById">{{projectOption.id}}</option>
+                <option [ngValue]="projectOption.id === task.project?.id ? task.project : projectOption" *ngFor="let projectOption of projects; trackBy: trackProjectById">{{projectOption.name}}</option>
             </select>
         </div>
     </div>

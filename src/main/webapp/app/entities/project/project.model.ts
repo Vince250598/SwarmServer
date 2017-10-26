@@ -5,6 +5,7 @@ export class Project implements BaseEntity {
         public id?: number,
         public name?: string,
         public description?: string,
+        public url?: string,
         public tasks?: BaseEntity[],
     ) {
     }

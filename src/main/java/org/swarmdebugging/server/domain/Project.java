@@ -33,6 +33,9 @@ public class Project implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "url")
+    private String url;
+
     @OneToMany(mappedBy = "project")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -71,6 +74,19 @@ public class Project implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public Project url(String url) {
+        this.url = url;
+        return this;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Set<Task> getTasks() {
@@ -125,6 +141,7 @@ public class Project implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
+            ", url='" + getUrl() + "'" +
             "}";
     }
 }

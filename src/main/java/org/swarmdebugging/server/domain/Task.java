@@ -27,11 +27,17 @@ public class Task implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    @Column(name = "tag")
+    private String tag;
+
     @Column(name = "title")
     private String title;
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "url")
+    private String url;
 
     @OneToMany(mappedBy = "task")
     @JsonIgnore
@@ -48,6 +54,19 @@ public class Task implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public Task tag(String tag) {
+        this.tag = tag;
+        return this;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     public String getTitle() {
@@ -74,6 +93,19 @@ public class Task implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public Task url(String url) {
+        this.url = url;
+        return this;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Set<Session> getSessions() {
@@ -139,8 +171,10 @@ public class Task implements Serializable {
     public String toString() {
         return "Task{" +
             "id=" + getId() +
+            ", tag='" + getTag() + "'" +
             ", title='" + getTitle() + "'" +
             ", description='" + getDescription() + "'" +
+            ", url='" + getUrl() + "'" +
             "}";
     }
 }

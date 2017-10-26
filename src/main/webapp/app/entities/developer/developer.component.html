@@ -30,6 +30,8 @@
             <thead>
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="swarmServerApp.developer.username">Username</span></th>
+            <th><span jhiTranslate="swarmServerApp.developer.password">Password</span></th>
             <th><span jhiTranslate="swarmServerApp.developer.name">Name</span></th>
             <th></th>
             </tr>
@@ -37,6 +39,8 @@
             <tbody>
             <tr *ngFor="let developer of developers ;trackBy: trackId">
                 <td><a [routerLink]="['../developer', developer.id ]">{{developer.id}}</a></td>
+                <td>{{developer.username}}</td>
+                <td>{{developer.password}}</td>
                 <td>{{developer.name}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

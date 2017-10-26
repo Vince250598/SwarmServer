@@ -27,13 +27,13 @@
         <dt><span jhiTranslate="swarmServerApp.session.task">Task</span></dt>
         <dd>
             <div *ngIf="session.task">
-                <a [routerLink]="['/task', session.task?.id]">{{session.task?.id}}</a>
+                <a [routerLink]="['/task', session.task?.id]">{{session.task?.title}}</a>
             </div>
         </dd>
         <dt><span jhiTranslate="swarmServerApp.session.developer">Developer</span></dt>
         <dd>
             <div *ngIf="session.developer">
-                <a [routerLink]="['/developer', session.developer?.id]">{{session.developer?.id}}</a>
+                <a [routerLink]="['/developer', session.developer?.id]">{{session.developer?.name}}</a>
             </div>
         </dd>
     </dl>

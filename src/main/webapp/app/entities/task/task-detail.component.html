@@ -4,6 +4,10 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="swarmServerApp.task.tag">Tag</span></dt>
+        <dd>
+            <span>{{task.tag}}</span>
+        </dd>
         <dt><span jhiTranslate="swarmServerApp.task.title">Title</span></dt>
         <dd>
             <span>{{task.title}}</span>
@@ -12,10 +16,14 @@
         <dd>
             <span>{{task.description}}</span>
         </dd>
+        <dt><span jhiTranslate="swarmServerApp.task.url">Url</span></dt>
+        <dd>
+            <span>{{task.url}}</span>
+        </dd>
         <dt><span jhiTranslate="swarmServerApp.task.project">Project</span></dt>
         <dd>
             <div *ngIf="task.project">
-                <a [routerLink]="['/project', task.project?.id]">{{task.project?.id}}</a>
+                <a [routerLink]="['/project', task.project?.id]">{{task.project?.name}}</a>
             </div>
         </dd>
     </dl>

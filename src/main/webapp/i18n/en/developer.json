@@ -16,6 +16,8 @@
             "detail": {
                 "title": "Developer"
             },
+            "username": "Username",
+            "password": "Password",
             "name": "Name",
             "session": "Session"
         }

@@ -27,6 +27,12 @@ public class Developer implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "jhi_password")
+    private String password;
+
     @Column(name = "name")
     private String name;
 
@@ -42,6 +48,32 @@ public class Developer implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public Developer username(String username) {
+        this.username = username;
+        return this;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Developer password(String password) {
+        this.password = password;
+        return this;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {
@@ -107,6 +139,8 @@ public class Developer implements Serializable {
     public String toString() {
         return "Developer{" +
             "id=" + getId() +
+            ", username='" + getUsername() + "'" +
+            ", password='" + getPassword() + "'" +
             ", name='" + getName() + "'" +
             "}";
     }

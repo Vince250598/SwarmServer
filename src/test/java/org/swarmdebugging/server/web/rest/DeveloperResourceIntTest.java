@@ -38,6 +38,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = SwarmServerApp.class)
 public class DeveloperResourceIntTest {
 
+    private static final String DEFAULT_USERNAME = "AAAAAAAAAA";
+    private static final String UPDATED_USERNAME = "BBBBBBBBBB";
+
+    private static final String DEFAULT_PASSWORD = "AAAAAAAAAA";
+    private static final String UPDATED_PASSWORD = "BBBBBBBBBB";
+
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
@@ -81,6 +87,8 @@ public class DeveloperResourceIntTest {
      */
     public static Developer createEntity(EntityManager em) {
         Developer developer = new Developer()
+            .username(DEFAULT_USERNAME)
+            .password(DEFAULT_PASSWORD)
             .name(DEFAULT_NAME);
         return developer;
     }
@@ -106,6 +114,8 @@ public class DeveloperResourceIntTest {
         List<Developer> developerList = developerRepository.findAll();
         assertThat(developerList).hasSize(databaseSizeBeforeCreate + 1);
         Developer testDeveloper = developerList.get(developerList.size() - 1);
+        assertThat(testDeveloper.getUsername()).isEqualTo(DEFAULT_USERNAME);
+        assertThat(testDeveloper.getPassword()).isEqualTo(DEFAULT_PASSWORD);
         assertThat(testDeveloper.getName()).isEqualTo(DEFAULT_NAME);
 
         // Validate the Developer in Elasticsearch
@@ -143,6 +153,8 @@ public class DeveloperResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(developer.getId().intValue())))
+            .andExpect(jsonPath("$.[*].username").value(hasItem(DEFAULT_USERNAME.toString())))
+            .andExpect(jsonPath("$.[*].password").value(hasItem(DEFAULT_PASSWORD.toString())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
     }
 
@@ -157,6 +169,8 @@ public class DeveloperResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(developer.getId().intValue()))
+            .andExpect(jsonPath("$.username").value(DEFAULT_USERNAME.toString()))
+            .andExpect(jsonPath("$.password").value(DEFAULT_PASSWORD.toString()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
     }
 
@@ -179,6 +193,8 @@ public class DeveloperResourceIntTest {
         // Update the developer
         Developer updatedDeveloper = developerRepository.findOne(developer.getId());
         updatedDeveloper
+            .username(UPDATED_USERNAME)
+            .password(UPDATED_PASSWORD)
             .name(UPDATED_NAME);
 
         restDeveloperMockMvc.perform(put("/api/developers")
@@ -190,6 +206,8 @@ public class DeveloperResourceIntTest {
         List<Developer> developerList = developerRepository.findAll();
         assertThat(developerList).hasSize(databaseSizeBeforeUpdate);
         Developer testDeveloper = developerList.get(developerList.size() - 1);
+        assertThat(testDeveloper.getUsername()).isEqualTo(UPDATED_USERNAME);
+        assertThat(testDeveloper.getPassword()).isEqualTo(UPDATED_PASSWORD);
         assertThat(testDeveloper.getName()).isEqualTo(UPDATED_NAME);
 
         // Validate the Developer in Elasticsearch
@@ -249,6 +267,8 @@ public class DeveloperResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(developer.getId().intValue())))
+            .andExpect(jsonPath("$.[*].username").value(hasItem(DEFAULT_USERNAME.toString())))
+            .andExpect(jsonPath("$.[*].password").value(hasItem(DEFAULT_PASSWORD.toString())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
     }
 

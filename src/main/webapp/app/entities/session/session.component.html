@@ -50,12 +50,12 @@
                 <td>{{session.finished | date:'medium'}}</td>
                 <td>
                     <div *ngIf="session.task">
-                        <a [routerLink]="['../task', session.task?.id ]" >{{session.task?.id}}</a>
+                        <a [routerLink]="['../task', session.task?.id ]" >{{session.task?.title}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="session.developer">
-                        <a [routerLink]="['../developer', session.developer?.id ]" >{{session.developer?.id}}</a>
+                        <a [routerLink]="['../developer', session.developer?.id ]" >{{session.developer?.name}}</a>
                     </div>
                 </td>
                 <td class="text-right">

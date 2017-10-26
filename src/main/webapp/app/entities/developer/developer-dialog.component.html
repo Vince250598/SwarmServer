@@ -13,6 +13,16 @@
                    [(ngModel)]="developer.id" readonly />
         </div>
         <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.developer.username" for="field_username">Username</label>
+            <input type="text" class="form-control" name="username" id="field_username"
+                [(ngModel)]="developer.username"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="swarmServerApp.developer.password" for="field_password">Password</label>
+            <input type="text" class="form-control" name="password" id="field_password"
+                [(ngModel)]="developer.password"  />
+        </div>
+        <div class="form-group">
             <label class="form-control-label" jhiTranslate="swarmServerApp.developer.name" for="field_name">Name</label>
             <input type="text" class="form-control" name="name" id="field_name"
                 [(ngModel)]="developer.name"  />

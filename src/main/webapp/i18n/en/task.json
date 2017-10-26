@@ -16,8 +16,10 @@
             "detail": {
                 "title": "Task"
             },
+            "tag": "Tag",
             "title": "Title",
             "description": "Description",
+            "url": "Url",
             "session": "Session",
             "project": "Project"
         }
