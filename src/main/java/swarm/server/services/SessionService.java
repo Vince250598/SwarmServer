@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class SessionService {
 	public String getGraphData(Long sessionId, boolean addType) {
 		StringBuffer graph = new StringBuffer();
 
-		Session session = repository.findOne(sessionId);
+		Optional<Session> session = repository.findById(sessionId);
 		
 		graph.append("[");
 		if(session != null) {
@@ -120,7 +121,7 @@ public class SessionService {
 	
 	public  String getStackData(Long sessionId) {
 		StringBuffer graph = new StringBuffer();
-	    Session session = repository.findOne(sessionId);
+	    Optional<Session> session = repository.findById(sessionId);
 				
 		List<Method> startingMethods = methodRepository.getStartingMethods(session);
 		List<Method> endingMethods = methodRepository.getEndingMethods(session);
@@ -185,7 +186,7 @@ public class SessionService {
 	
 	public String getInterPathEdges(Long sessionId) {
 		StringBuffer graph = new StringBuffer();
-	    Session session = repository.findOne(sessionId);
+	    Optional<Session> session = repository.findById(sessionId);
 		
 		List<Method> startingMethods = methodRepository.getStartingMethods(session);
 		List<Method> endingMethods = methodRepository.getEndingMethods(session);
@@ -237,7 +238,7 @@ public class SessionService {
 		}
 	}
 	
-	List<List<Invocation>> getInvocationPaths(List<Method> startingMethods, List<Method> endingMethods, Session session) {
+	List<List<Invocation>> getInvocationPaths(List<Method> startingMethods, List<Method> endingMethods, Optional<Session> session) {
 		List<List<Invocation>> paths = new ArrayList<List<Invocation>>();
 		List<Invocation> uniqueInvocations = new ArrayList<Invocation>();
 		
@@ -300,14 +301,14 @@ public class SessionService {
 	}
 
 	public int countElements(Long sessionId) {
-		Session session = repository.findOne(sessionId);
+		Optional<Session> session = repository.findById(sessionId);
 		int invocations = invocationRepository.countBySession(session);
 		int methods = methodRepository.countBySession(session);
 		return invocations + methods;
 	}
 
 	public String getStartingMethods(Long sessionId) {
-	    Session session = repository.findOne(sessionId);
+	    Optional<Session> session = repository.findById(sessionId);
 		List<Method> startingMethods = methodRepository.getStartingMethods(session);
 
 		Gson gson = new Gson();
@@ -315,7 +316,7 @@ public class SessionService {
 	}
 
 	public String getEndingMethods(Long sessionId) {
-	    Session session = repository.findOne(sessionId);
+	    Optional<Session> session = repository.findById(sessionId);
 		List<Method> endingMethods = methodRepository.getEndingMethods(session);
 
 		Gson gson = new Gson();

@@ -1,6 +1,7 @@
 package swarm.server.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -16,5 +17,5 @@ public interface TypeRepository extends PagingAndSortingRepository<Type, Long> {
 	@Query("Select t from Type t Where t.session.id = :sessionId")
 	List<Type> findBySessionId(@Param("sessionId") Long sessionId);
 
-	List<Type> findBySession(@Param("session") Session session);
+	List<Type> findBySession(@Param("session") Optional<Session> session);
 }
