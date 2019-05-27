@@ -1,29 +1,33 @@
 package swarm.server.domains;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+
 @Entity
-public class Session implements Serializable {
+public class Session implements Serializable{
 
 	private static final long serialVersionUID = -1945528119276270987L;
-
+	
 	@Id
-	@GeneratedValue
-	private Long id;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
 
 	@ManyToOne
 	private Developer developer;
 	
 	@ManyToOne
-	private Project project;
+	private Task task;
 	
 	String description;	
 
@@ -31,12 +35,30 @@ public class Session implements Serializable {
 	
 	String purpose;
 	
+	String project;
+	
+	@Column(name="CREATION_TS", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable=false, updatable=false)
+	private Calendar timestamp;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date started;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date finished;
-
+	
+	public Session () {}
+	
+	public Session(Developer developer, Task task, String description, String label, String purpose, String project, Date started, Date finished) {
+		this.developer = developer;
+		this.task = task;
+		this.description = description;
+		this.label = label;
+		this.purpose = purpose;
+		this.project = project;
+		this.started = started;
+		this.finished = finished;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -53,12 +75,12 @@ public class Session implements Serializable {
 		this.developer = developer;
 	}
 
-	public Project getProject() {
-		return project;
+	public Task getTask() {
+		return task;
 	}
 
-	public void setProject(Project project) {
-		this.project = project;
+	public void setTask(Task project) {
+		this.task = project;
 	}
 
 	public String getDescription() {
@@ -85,6 +107,14 @@ public class Session implements Serializable {
 		this.purpose = purpose;
 	}
 
+	public String getProject() {
+		return project;
+	}
+
+	public void setProject(String project) {
+		this.project = project;
+	}
+	
 	public Date getStarted() {
 		return started;
 	}
@@ -100,4 +130,25 @@ public class Session implements Serializable {
 	public void setFinished(Date finished) {
 		this.finished = finished;
 	}
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Session session = (Session) o;
+
+        return id.equals(session.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
+    @Override
+    public String toString() {
+		return id + ": " + description;
+	}
+	
 }

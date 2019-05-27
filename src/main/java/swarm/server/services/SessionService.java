@@ -6,122 +6,139 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
+import io.leangen.graphql.annotations.GraphQLArgument;
+import io.leangen.graphql.annotations.GraphQLQuery;
+import io.leangen.graphql.spqr.spring.annotation.GraphQLApi;
 import swarm.server.domains.Invocation;
 import swarm.server.domains.Method;
 import swarm.server.domains.Session;
 import swarm.server.domains.Type;
+import swarm.server.repositories.InvocationRepository;
+import swarm.server.repositories.MethodRepository;
+import swarm.server.repositories.SessionRepository;
+import swarm.server.repositories.TypeRepository;
 
 @Service
+@GraphQLApi
 public class SessionService {
 
-	@Autowired
-	private SessionRepository  repository; 
-
-	@Autowired
+	private SessionRepository sessionRepository; 
 	private TypeRepository  typeRepository; 
-
-	@Autowired
 	private MethodRepository  methodRepository; 
-	
-	@Autowired
 	private InvocationRepository  invocationRepository; 
+	private StringBuffer graph;
 	
-
-	public String findSessions(Long projectId, Long developerId) {
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").create();
-		return gson.toJson(repository.findByProjectAndDeveloper(projectId, developerId));
+	public SessionService(SessionRepository sessionRepository, TypeRepository typeRepository, MethodRepository methodRepository, InvocationRepository invocationRepository) {
+		this.sessionRepository = sessionRepository;
+		this.typeRepository = typeRepository;
+		this.methodRepository = methodRepository;
+		this.invocationRepository = invocationRepository;
 	}
 
-	public String getGraphData(Long sessionId, boolean addType) {
-		StringBuffer graph = new StringBuffer();
+	@GraphQLQuery
+	public Iterable<Session> sessionsByTaskIdAndDeveloperId(@GraphQLArgument(name = "taskId") Long taskId, @GraphQLArgument(name = "developerId") Long developerId){
+    	return sessionRepository.findByTaskAndDeveloper(taskId, developerId);
+    }
 
-		Optional<Session> session = repository.findById(sessionId);
-		
-		graph.append("[");
+	@GraphQLQuery(name = "getGraphData")
+    public String getGraphData(@GraphQLArgument(name = "sessionId") Long sessionId, @GraphQLArgument(name = "addType") boolean addType) {
+		Optional<Session> session = sessionRepository.findById(sessionId);
+		return getGraphData(session, addType, true);
+	}
+	
+	
+	public String getGraphData(Optional<Session> session, boolean addType, boolean closed) {
+		graph = new StringBuffer();		
+		if(closed) { 
+			graph.append("[");
+		}
 		if(session != null) {
-			List<Type> types = typeRepository.findBySession(session);
-			for (Type type : types) {
-				int hash = type.getFullName().hashCode();
-				int r = (hash & 0xFF0000) >> 16;
-				int g = (hash & 0x00FF00) >> 8;
-				int b = hash & 0x0000FF;
-				
-				boolean newType = true;
-				List<Method> methods = methodRepository.findByType(type);
-				for(Method method : methods) {
-//					int hash = method.key.hashCode()
-//					int r = (hash & 0xFF0000) >> 16
-//					int g = (hash & 0x00FF00) >> 8
-//					int b = hash & 0x0000FF
-					
-					int invocations = invocationRepository.countInvocations(session, method);
-
-					if(invocations > 0) {
-						if(addType && newType) {
-							newType = false;
-							graph.append("{ \"group\": \"nodes\", ");
-							graph.append("\"data\": { \"id\": \"T" + type.getId() + "\", \"label\": \"" + type.getFullName() + "\", \"shape\": \"roundrectangle\", \"color\": \"#888\"}},");
-						}
-						
-						graph.append("{ \"group\": \"nodes\", ");
-						graph.append("\"data\": { \"id\": \"M" + method.getId() + "\", \"label\": \"" + type.getName() + ". " + method.getName() + "\", ");
-						graph.append("\"color\": \"" + String.format("#%02x%02x%02x", r, g, b) + "\"");
-						
-						if(addType) {
-							graph.append(",\"parent\": \"T" + type.getId() + "\"");
-						}
-
-						graph.append("}},");
-					}
-				}
-			}
-
-			List<Invocation> invocations = invocationRepository.findBySession(session);
-			
-
-			if(invocations.size() > 0) {
-				Map<String,String> labels = new HashMap<String,String>();
-				for(int i = 0; i < invocations.size(); i++) {
-					Invocation invocation = invocations.get(i);
-					String key = invocation.getInvoking().getId() + "->" + invocation.getInvoked().getId(); 
-					labels.put(key,(labels.get(key) != null ? labels.get(key) : "") + (i+1) + ",");
-				}
-
-				for (Invocation invocation : invocations) {
-					String key = invocation.getInvoking().getId() + "->" + invocation.getInvoked().getId();
-					if(labels.containsKey(key)) {
-						String label = labels.get(key).substring(0,labels.get(key).length() - 1);
-						
-						graph.append("{ \"group\": \"edges\", ");
-						graph.append("\"data\":{ \"id\": \"I" + invocation.getId() + "\", " );
-						graph.append("\"source\": " + "\"M" + invocation.getInvoking().getId() + "\", ");
-						graph.append("\"target\": " + "\"M" + invocation.getInvoked().getId() + "\", ");
-						graph.append("\"line-color\": " + "\"light-gray" + "\", ");
-						graph.append("\"target-arrow-color\": " + "\"light-gray" + "\", ");
-				        graph.append("\"label\": \"[" + (label.length() > 30 ? "*": label)   + "]\" }},");
-						labels.remove(key);
-					}
-				}
-			}
+			graphAddSession(session,addType,closed);
+			graphAddInvocation(session);
 		}
-		
+		String output;
 		if(graph.length() > 2) {
-			return graph.substring(0, graph.length() - 1) + "]";
+			output =  graph.substring(0, graph.length() - 1) + (closed ? "]" : "");
 		} else {
-			return graph + "]";
+			output = graph.toString() + (closed ? "]" : "");
+		}
+		return output;
+	}
+	
+	private void graphAddSession(Optional<Session> session, boolean addType, boolean closed){
+		List<Type> types = typeRepository.findBySession(session);
+		for (Type type : types) {								
+			int hash = type.getFullName().hashCode();
+			int r = (hash & 0xFF0000) >> 16;
+			int g = (hash & 0x00FF00) >> 8;
+			int b = hash & 0x0000FF;			
+			boolean newType = true;
+			graphAddSessionAddMethod(type,addType,newType,session,r,g,b);
 		}
 	}
 	
+	private void graphAddSessionAddMethod(Type type, boolean addType, boolean newType, Optional<Session> session, int r, int g, int b) {
+		List<Method> methods = methodRepository.findByType(type);
+		for(Method method : methods) {					
+			int invocations = invocationRepository.countInvocations(session, method);
+			if(invocations > 0) {
+				if(addType && newType) {
+					newType = false;
+					graphAddSessionAddType(type);
+				}
+				graph.append("{ \"group\": \"nodes\", ");
+				graph.append("\"data\": { \"id\": \"M" + method.getId() + "\", \"label\": \"" + type.getName() + ". " + method.getName() + "\", ");
+				graph.append("\"color\": \"" + String.format("#%02x%02x%02x", r, g, b) + "\"");				
+				if(addType) {
+					graph.append(",\"parent\": \"T" + type.getId() + "\"");
+				}
+				graph.append("}},");
+			}
+		}
+	}
 	
-	public  String getStackData(Long sessionId) {
+	private void graphAddSessionAddType(Type type) {
+		graph.append("{ \"group\": \"nodes\", ");
+		graph.append("\"data\": { \"id\": \"T" + type.getId() + "\", \"label\": \"" + type.getFullName() + "\", \"shape\": \"roundrectangle\", \"color\": \"#888\"}},");		
+	}
+	
+	private void graphAddInvocation(Optional<Session> session) {
+		List<Invocation> invocations = invocationRepository.findBySession(session);
+		if(invocations.size() > 0) {
+			Map<String,String> labels = new HashMap<String,String>();
+			for(int i = 0; i < invocations.size(); i++) {
+				Invocation invocation = invocations.get(i);
+				String key = invocation.getInvoking().getId() + "->" + invocation.getInvoked().getId(); 
+				labels.put(key,(labels.get(key) != null ? labels.get(key) : "") + (i+1) + ",");
+			}
+			for (Invocation invocation : invocations) {
+				labels = graphAddInvocationAddString(invocation,labels);
+			}
+		}
+	}
+	
+	private Map<String, String> graphAddInvocationAddString(Invocation invocation, Map<String, String> labels) {
+		String key = invocation.getInvoking().getId() + "->" + invocation.getInvoked().getId();
+		if(labels.containsKey(key)) {
+			String label = labels.get(key).substring(0,labels.get(key).length() - 1);					
+			graph.append("{ \"group\": \"edges\", ");
+			graph.append("\"data\":{ \"id\": \"I" + invocation.getId() + "\", " );
+			graph.append("\"source\": " + "\"M" + invocation.getInvoking().getId() + "\", ");
+			graph.append("\"target\": " + "\"M" + invocation.getInvoked().getId() + "\", ");
+			graph.append("\"line-color\": " + "\"light-gray" + "\", ");
+			graph.append("\"target-arrow-color\": " + "\"light-gray" + "\", ");
+	        graph.append("\"label\": \"[" + (label.length() > 30 ? "*": label)   + "]\" }},");
+			labels.remove(key);
+		}
+		return labels;
+	}
+	
+	@GraphQLQuery(name = "getStackData")
+	public  String getStackData(@GraphQLArgument(name = "sessionId") Long sessionId) {
 		StringBuffer graph = new StringBuffer();
-	    Optional<Session> session = repository.findById(sessionId);
+	    Optional<Session> session = sessionRepository.findById(sessionId);
 				
 		List<Method> startingMethods = methodRepository.getStartingMethods(session);
 		List<Method> endingMethods = methodRepository.getEndingMethods(session);
@@ -183,10 +200,10 @@ public class SessionService {
 		return buffer.toString();
 	}
 	
-	
-	public String getInterPathEdges(Long sessionId) {
+	@GraphQLQuery(name = "getInterPathEdges")
+	public String getInterPathEdges(@GraphQLArgument(name = "sessionId") Long sessionId) {
 		StringBuffer graph = new StringBuffer();
-	    Optional<Session> session = repository.findById(sessionId);
+	    Optional<Session> session = sessionRepository.findById(sessionId);
 		
 		List<Method> startingMethods = methodRepository.getStartingMethods(session);
 		List<Method> endingMethods = methodRepository.getEndingMethods(session);
@@ -299,27 +316,24 @@ public class SessionService {
 		paths.add(pathInvocations);
 		return paths;
 	}
-
-	public int countElements(Long sessionId) {
-		Optional<Session> session = repository.findById(sessionId);
+	
+	@GraphQLQuery
+	public int countElements(@GraphQLArgument(name = "sessionId") Long sessionId) {
+		Optional<Session> session = sessionRepository.findById(sessionId);
 		int invocations = invocationRepository.countBySession(session);
 		int methods = methodRepository.countBySession(session);
 		return invocations + methods;
 	}
-
-	public String getStartingMethods(Long sessionId) {
-	    Optional<Session> session = repository.findById(sessionId);
-		List<Method> startingMethods = methodRepository.getStartingMethods(session);
-
-		Gson gson = new Gson();
-		return gson.toJson(startingMethods);
-	}
-
-	public String getEndingMethods(Long sessionId) {
-	    Optional<Session> session = repository.findById(sessionId);
-		List<Method> endingMethods = methodRepository.getEndingMethods(session);
-
-		Gson gson = new Gson();
-		return gson.toJson(endingMethods);
+	
+	@GraphQLQuery(name = "getGraphDataByTaskId")
+	public String getGraphDataByTaskId(@GraphQLArgument(name = "taskId") Long taskId) {
+		String graph = "[";
+		
+		List<Optional<Session>> sessions = sessionRepository.findByTask(taskId);
+		for (Optional<Session> session : sessions) {
+			graph += getGraphData(session, false, false);
+		}
+		
+		return graph + "]";
 	}
 }

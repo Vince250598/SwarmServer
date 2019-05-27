@@ -1,23 +1,30 @@
 package swarm.server.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.Gson;
-
+import io.leangen.graphql.annotations.GraphQLArgument;
+import io.leangen.graphql.annotations.GraphQLQuery;
+import io.leangen.graphql.spqr.spring.annotation.GraphQLApi;
 import swarm.server.domains.Developer;
+import swarm.server.repositories.DeveloperRepository;
 
 @Service
+@GraphQLApi
 public class DeveloperService {
 
-	@Autowired
-	private DeveloperRepository  repository; 
+	private DeveloperRepository developerRepository; 
 
-	public String login(String name) {
-		Developer dev = repository.findByNameAllIgnoringCase(name);
-		
-		Gson gson = new Gson(); 
-		String json = gson.toJson(dev);
-        return json;
+	public DeveloperService(DeveloperRepository developerRepository) {
+		this.developerRepository = developerRepository;
+	}
+	
+	@GraphQLQuery
+	public Developer login(@GraphQLArgument(name = "name") String name) {
+		return developerRepository.findByNameAllIgnoringCase(name);
+	}
+	
+	@GraphQLQuery
+	public Iterable<Developer> allDevelopers() {
+		return developerRepository.findAll();
 	}
 }

@@ -1,19 +1,33 @@
 package swarm.server.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
-import com.google.gson.Gson;
+import io.leangen.graphql.annotations.GraphQLArgument;
+import io.leangen.graphql.annotations.GraphQLQuery;
+import io.leangen.graphql.spqr.spring.annotation.GraphQLApi;
+import swarm.server.domains.Invocation;
+import swarm.server.repositories.InvocationRepository;
 
 @Service
+@GraphQLApi
 public class InvocationService {
 
-	@Autowired
-	private InvocationRepository  repository;
+	private InvocationRepository invocationRepository;
+	
+	public InvocationService(InvocationRepository invocationRepository) {
+		this.invocationRepository = invocationRepository;
+	}
 
-	public String getInvocationsByMethods(Long sessionId, Long invokingId, Long invokedId) {
-		Gson gson = new Gson();
-		return gson.toJson(repository.findByMethods(sessionId, invokingId, invokedId));
-
+	@GraphQLQuery(name="getInvocationsByMethods")
+	public Iterable<Invocation> getInvocationsByMethods(
+			@GraphQLArgument(name = "sessionId") Long sessionId, 
+			@GraphQLArgument(name = "invokingId") Long invokingId, 
+			@GraphQLArgument(name = "invokedId") Long invokedId) {
+		/*Gson gson = new Gson();
+		return gson.toJson(invocationRepository.findByMethods(sessionId, invokingId, invokedId));*/
+		return invocationRepository.findByMethods(sessionId, invokingId, invokedId);
 	} 
+	
+	
 }

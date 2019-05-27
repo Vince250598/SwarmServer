@@ -1,4 +1,4 @@
-package swarm.server.controllers.rest;
+/*package swarm.server.controllers.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,4 +16,4 @@ public class NamespaceRestController {
     public String findbyFullPath(String fullPath) {
 		return service.findbyFullPath(fullPath);
     }	
-}
+}*/

@@ -1,4 +1,4 @@
-package swarm.server.controllers.rest;
+/*package swarm.server.controllers.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,4 +16,4 @@ public class InvocationRestController {
     public String getInvocationsByMethods(Long sessionId, Long invokingId, Long invokedId) {
 		return service.getInvocationsByMethods(sessionId, invokingId, invokedId);
     }	
-}
+}*/

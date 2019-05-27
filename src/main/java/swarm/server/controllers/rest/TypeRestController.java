@@ -1,4 +1,4 @@
-package swarm.server.controllers.rest;
+/*package swarm.server.controllers.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,4 +16,4 @@ public class TypeRestController {
     public String getBySessionId(Long sessionId) {
 		return service.getBySessionId(sessionId);
     }
-}
+}*/

@@ -1,18 +1,25 @@
 package swarm.server.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.Gson;
+import io.leangen.graphql.annotations.GraphQLArgument;
+import io.leangen.graphql.annotations.GraphQLQuery;
+import io.leangen.graphql.spqr.spring.annotation.GraphQLApi;
+import swarm.server.domains.Type;
+import swarm.server.repositories.TypeRepository;
 
 @Service
+@GraphQLApi
 public class TypeService {
 
-	@Autowired
-	private TypeRepository  repository;
+	private TypeRepository typeRepository;
 	
-	public String getBySessionId(Long sessionId) {
-		Gson gson = new Gson();
-		return gson.toJson(repository.findBySessionId(sessionId));
+	public TypeService(TypeRepository typeRepository) {
+		this.typeRepository = typeRepository;
 	}
+	
+	@GraphQLQuery
+	public Iterable<Type> typesBySessionId(@GraphQLArgument(name = "sessionId") Long sessionId){
+    	return typeRepository.findBySessionId(sessionId);
+    }
 }
