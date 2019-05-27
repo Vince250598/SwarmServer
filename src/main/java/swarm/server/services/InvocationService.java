@@ -1,6 +1,7 @@
 package swarm.server.services;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
@@ -13,8 +14,9 @@ import swarm.server.repositories.InvocationRepository;
 @GraphQLApi
 public class InvocationService {
 
-	private InvocationRepository invocationRepository;
+	private final InvocationRepository invocationRepository;
 	
+	@Autowired
 	public InvocationService(InvocationRepository invocationRepository) {
 		this.invocationRepository = invocationRepository;
 	}

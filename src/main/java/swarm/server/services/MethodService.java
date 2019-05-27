@@ -2,6 +2,7 @@ package swarm.server.services;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
@@ -16,9 +17,10 @@ import swarm.server.repositories.SessionRepository;
 @GraphQLApi
 public class MethodService {
 
-	private MethodRepository methodRepository; 
-	private SessionRepository sessionRepository;
+	private final MethodRepository methodRepository; 
+	private final SessionRepository sessionRepository;
 	
+	@Autowired
 	public MethodService(MethodRepository methodRepository, SessionRepository sessionRepository) {
 		this.methodRepository = methodRepository;
 		this.sessionRepository = sessionRepository;

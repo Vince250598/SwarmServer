@@ -2,6 +2,7 @@ package swarm.server.services;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
@@ -14,8 +15,9 @@ import swarm.server.repositories.ArtefactRepository;
 @Service
 public class ArtefactService {
 	
-	private ArtefactRepository artefactRepository;
+	private final ArtefactRepository artefactRepository;
 	
+	@Autowired
 	public ArtefactService(ArtefactRepository artefactRepository) {
 		this.artefactRepository = artefactRepository;
 	}

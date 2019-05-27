@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
@@ -25,10 +26,11 @@ import java.util.Optional;
 @GraphQLApi
 public class TaskService {
 
-	private TaskRepository taskRepository;
-	private TypeRepository typeRepository;
-	private BreakpointRepository breakpointRepository;
+	private final TaskRepository taskRepository;
+	private final TypeRepository typeRepository;
+	private final BreakpointRepository breakpointRepository;
 	
+	@Autowired
 	public TaskService(TaskRepository taskRepository, TypeRepository typeRepository, BreakpointRepository breakpointRepository) {
 		this.taskRepository = taskRepository;
 		this.typeRepository = typeRepository;

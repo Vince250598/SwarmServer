@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
@@ -20,10 +21,11 @@ import swarm.server.repositories.TypeRepository;
 @Service
 public class ProductService {
 	
-	private ProductRepository productRepository;
-	private InvocationRepository invocationRepository;
-	private TypeRepository typeRepository;
+	private final ProductRepository productRepository;
+	private final InvocationRepository invocationRepository;
+	private final TypeRepository typeRepository;
 	
+	@Autowired
 	public ProductService(ProductRepository productRepository, InvocationRepository invocationRepository, TypeRepository typeRepository) {
 		this.productRepository = productRepository;
 		this.invocationRepository = invocationRepository;

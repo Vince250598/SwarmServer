@@ -1,5 +1,6 @@
 package swarm.server.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
@@ -12,8 +13,9 @@ import swarm.server.repositories.NamespaceRepository;
 @GraphQLApi
 public class NamespaceService {
 
-	private NamespaceRepository  namespaceRepository;
+	private final NamespaceRepository  namespaceRepository;
 	
+	@Autowired
 	public NamespaceService(NamespaceRepository namespaceRepository) {
 		this.namespaceRepository = namespaceRepository;
 	}

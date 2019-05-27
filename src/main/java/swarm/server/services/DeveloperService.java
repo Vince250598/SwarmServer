@@ -1,5 +1,6 @@
 package swarm.server.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
@@ -12,8 +13,9 @@ import swarm.server.repositories.DeveloperRepository;
 @GraphQLApi
 public class DeveloperService {
 
-	private DeveloperRepository developerRepository; 
+	private final DeveloperRepository developerRepository; 
 
+	@Autowired
 	public DeveloperService(DeveloperRepository developerRepository) {
 		this.developerRepository = developerRepository;
 	}

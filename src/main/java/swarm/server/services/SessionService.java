@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
@@ -24,12 +25,13 @@ import swarm.server.repositories.TypeRepository;
 @GraphQLApi
 public class SessionService {
 
-	private SessionRepository sessionRepository; 
-	private TypeRepository  typeRepository; 
-	private MethodRepository  methodRepository; 
-	private InvocationRepository  invocationRepository; 
+	private final SessionRepository sessionRepository; 
+	private final TypeRepository  typeRepository; 
+	private final MethodRepository  methodRepository; 
+	private final InvocationRepository  invocationRepository; 
 	private StringBuffer graph;
 	
+	@Autowired
 	public SessionService(SessionRepository sessionRepository, TypeRepository typeRepository, MethodRepository methodRepository, InvocationRepository invocationRepository) {
 		this.sessionRepository = sessionRepository;
 		this.typeRepository = typeRepository;

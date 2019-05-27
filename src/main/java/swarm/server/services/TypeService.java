@@ -1,5 +1,6 @@
 package swarm.server.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
@@ -12,8 +13,9 @@ import swarm.server.repositories.TypeRepository;
 @GraphQLApi
 public class TypeService {
 
-	private TypeRepository typeRepository;
+	private final TypeRepository typeRepository;
 	
+	@Autowired
 	public TypeService(TypeRepository typeRepository) {
 		this.typeRepository = typeRepository;
 	}

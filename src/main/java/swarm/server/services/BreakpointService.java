@@ -3,6 +3,7 @@ package swarm.server.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
@@ -17,9 +18,10 @@ import swarm.server.repositories.ProductRepository;
 @GraphQLApi
 public class BreakpointService {
 	
-	private BreakpointRepository breakpointRepository;
-	private ProductRepository productRepository;
+	private final BreakpointRepository breakpointRepository;
+	private final ProductRepository productRepository;
 	
+	@Autowired
 	public BreakpointService(BreakpointRepository breakpointRepo, ProductRepository productRepo) {
 		this.breakpointRepository = breakpointRepo;
 		this.productRepository = productRepo;
