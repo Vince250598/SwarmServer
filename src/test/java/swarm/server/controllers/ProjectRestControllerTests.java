@@ -1,4 +1,4 @@
-package swarm.server.controllers;
+/*package swarm.server.controllers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -34,3 +34,4 @@ public class ProjectRestControllerTests {
 		this.mvc.perform(get("/projects/all")).andReturn().toString().contains("Editor");
 	}
 }
+*/

@@ -1,4 +1,4 @@
-package swarm.server.controllers;
+/*package swarm.server.controllers;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -41,4 +41,4 @@ public class DeveloperRestControllerTests {
 		//this.mvc.perform(get("/developer/projects?developerId=1")).andExpect(jsonPath("name", equalTo("petrillo")));
 		System.out.println(this.mvc.perform(get("/developer/projects?developerId=1")).andReturn().getResponse().getContentAsString());
 	}
-}
+}*/

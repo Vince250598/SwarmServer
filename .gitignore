@@ -5,3 +5,11 @@
 /build/
 /.settings/
 /.classpath
+
+\.gradle/5\.4\.1/fileHashes/resourceHashesCache\.bin
+
+\.gradle/5\.4\.1/javaCompile/classAnalysis\.bin
+
+\.gradle/5\.4\.1/javaCompile/jarAnalysis\.bin
+
+\.gradle/5\.4\.1/javaCompile/taskHistory\.bin
