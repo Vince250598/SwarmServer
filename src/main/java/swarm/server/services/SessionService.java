@@ -1,6 +1,7 @@
 package swarm.server.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,11 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
+import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotation.GraphQLApi;
+import swarm.server.domains.Developer;
 import swarm.server.domains.Invocation;
 import swarm.server.domains.Method;
 import swarm.server.domains.Session;
+import swarm.server.domains.Task;
 import swarm.server.domains.Type;
 import swarm.server.repositories.InvocationRepository;
 import swarm.server.repositories.MethodRepository;
@@ -39,6 +43,14 @@ public class SessionService {
 		this.invocationRepository = invocationRepository;
 	}
 
+	@GraphQLMutation //started and finished necessary?
+	public Session createSession(@GraphQLArgument(name = "developer") Developer developer, @GraphQLArgument(name = "task") Task task,
+			@GraphQLArgument(name = "description") String description, @GraphQLArgument(name = "label") String label,
+			@GraphQLArgument(name = "purpose") String purpose, @GraphQLArgument(name = "project") String project,
+			@GraphQLArgument(name = "started") Date started, @GraphQLArgument(name = "finished") Date finished) {
+		return sessionRepository.save(new Session(developer, task, description,label,purpose,project,started,finished));
+	}
+	
 	@GraphQLQuery
 	public Iterable<Session> sessionsByTaskIdAndDeveloperId(@GraphQLArgument(name = "taskId") Long taskId, @GraphQLArgument(name = "developerId") Long developerId){
     	return sessionRepository.findByTaskAndDeveloper(taskId, developerId);

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
+import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotation.GraphQLApi;
 import swarm.server.domains.Artefact;
@@ -30,6 +31,11 @@ public class ArtefactService {
 	@GraphQLQuery
 	public Optional<Artefact> artefactById(@GraphQLArgument(name = "artefactId") Long artefactId) {
 		return artefactRepository.findById(artefactId);
+	}
+	
+	@GraphQLMutation
+	public Artefact createArtefact(@GraphQLArgument(name = "sourceCode") String sourceCode, @GraphQLArgument(name = "version") Long version) {
+		return artefactRepository.save(new Artefact(sourceCode, version));
 	}
 
 }

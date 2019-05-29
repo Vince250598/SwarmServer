@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
+import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotation.GraphQLApi;
 import swarm.server.domains.Namespace;
@@ -25,4 +26,8 @@ public class NamespaceService {
 		return namespaceRepository.findByFullPath(fullPath);
 	} 
 
+	@GraphQLMutation
+	public Namespace createNamespace(@GraphQLArgument(name = "name") String name, @GraphQLArgument(name = "fullPath") String fullPath) {
+		return namespaceRepository.save(new Namespace(name, fullPath));
+	}
 }

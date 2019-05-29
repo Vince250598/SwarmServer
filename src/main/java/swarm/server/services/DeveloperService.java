@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
+import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotation.GraphQLApi;
 import swarm.server.domains.Developer;
@@ -28,5 +29,14 @@ public class DeveloperService {
 	@GraphQLQuery
 	public Iterable<Developer> allDevelopers() {
 		return developerRepository.findAll();
+	}
+	
+	public Developer save(Developer developer) {
+		return developerRepository.save(developer);
+	}
+	
+	@GraphQLMutation
+	public Developer createDeveloper(@GraphQLArgument(name = "name") String name, @GraphQLArgument(name = "color") String color) {
+		return developerRepository.save(new Developer(name, color));
 	}
 }

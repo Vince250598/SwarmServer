@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
+import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotation.GraphQLApi;
 import swarm.server.domains.Invocation;
@@ -30,6 +31,11 @@ public class ProductService {
 		this.productRepository = productRepository;
 		this.invocationRepository = invocationRepository;
 		this.typeRepository = typeRepository;
+	}
+	
+	@GraphQLMutation
+	public Product createProduct(@GraphQLArgument(name = "name") String name) {
+		return productRepository.save(new Product(name));
 	}
 	
 	@GraphQLQuery(name = "getProductPaths")

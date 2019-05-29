@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
+import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotation.GraphQLApi;
 import swarm.server.domains.Method;
 import swarm.server.domains.Session;
+import swarm.server.domains.Type;
 import swarm.server.repositories.MethodRepository;
 import swarm.server.repositories.SessionRepository;
 
@@ -24,6 +26,12 @@ public class MethodService {
 	public MethodService(MethodRepository methodRepository, SessionRepository sessionRepository) {
 		this.methodRepository = methodRepository;
 		this.sessionRepository = sessionRepository;
+	}
+	
+	@GraphQLMutation
+	public Method createMethod(@GraphQLArgument(name = "type") Type type, @GraphQLArgument(name = "key") String key, 
+			@GraphQLArgument(name = "name") String name, @GraphQLArgument(name = "signature") String signature) {
+		return methodRepository.save(new Method(type, key, name, signature));
 	}
 
 	@GraphQLQuery

@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
+import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotation.GraphQLApi;
 import swarm.server.domains.Breakpoint;
 import swarm.server.domains.Product;
+import swarm.server.domains.Type;
 import swarm.server.repositories.BreakpointRepository;
 import swarm.server.repositories.ProductRepository;
 
@@ -25,6 +27,12 @@ public class BreakpointService {
 	public BreakpointService(BreakpointRepository breakpointRepo, ProductRepository productRepo) {
 		this.breakpointRepository = breakpointRepo;
 		this.productRepository = productRepo;
+	}
+	
+	@GraphQLMutation
+	public Breakpoint createBreakpoint(@GraphQLArgument(name = "type") Type type, @GraphQLArgument(name = "charStart") String charStart, 
+			@GraphQLArgument(name = "charEnd") String charEnd, @GraphQLArgument(name = "lineNumber") Integer lineNumber) {
+		return breakpointRepository.save(new Breakpoint(type, charStart, charEnd, lineNumber));
 	}
 	
 	@GraphQLQuery

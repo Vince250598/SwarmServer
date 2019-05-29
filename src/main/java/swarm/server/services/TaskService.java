@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.leangen.graphql.annotations.GraphQLArgument;
+import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotation.GraphQLApi;
 import swarm.server.domains.Breakpoint;
+import swarm.server.domains.Product;
 import swarm.server.domains.Task;
 import swarm.server.domains.Type;
 import swarm.server.repositories.BreakpointRepository;
@@ -31,12 +33,19 @@ public class TaskService {
 	private final BreakpointRepository breakpointRepository;
 	
 	@Autowired
-	public TaskService(TaskRepository taskRepository, TypeRepository typeRepository, BreakpointRepository breakpointRepository) {
+	public TaskService(TaskRepository taskRepository, TypeRepository typeRepository,
+			BreakpointRepository breakpointRepository) {
 		this.taskRepository = taskRepository;
 		this.typeRepository = typeRepository;
 		this.breakpointRepository = breakpointRepository;
 	}
 
+	@GraphQLMutation
+	public Task createTask(@GraphQLArgument(name = "product") Product product, @GraphQLArgument(name = "title") String title,
+			@GraphQLArgument(name = "url") String url, @GraphQLArgument(name = "color") String color) {
+		return taskRepository.save(new Task(product, title, url, color));
+	}
+	
 	@GraphQLQuery
     public Iterable<Task> allTasks() {
         return taskRepository.findAll();
