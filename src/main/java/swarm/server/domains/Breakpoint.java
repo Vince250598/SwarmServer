@@ -1,20 +1,24 @@
 package swarm.server.domains;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-@Entity
-public class Breakpoint implements Serializable {
-	private static final long serialVersionUID = -7145408705221743773L;
 
+@Entity
+public class Breakpoint implements Serializable{
+	
+	private static final long serialVersionUID = -7145408705221743773L;
+	
 	@Id
-	@GeneratedValue
-	private Long id;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
 	
 	@ManyToOne(optional = false)
 	private Type type;
@@ -27,7 +31,39 @@ public class Breakpoint implements Serializable {
 	
 	@Column(nullable = false)
 	Integer lineNumber;
-		
+	
+	@Column(name="CREATION_TS", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable=false, updatable=false)
+	private Calendar timestamp;
+	
+	public Breakpoint() {}
+	
+	public Breakpoint(Type type, String charStart, String charEnd, Integer lineNumber) {
+		this.type = type;
+		this.charStart = charStart;
+		this.charEnd = charEnd;
+		this.lineNumber = lineNumber;
+	}
+	
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Breakpoint breakpoint = (Breakpoint) o;
+
+        return id.equals(breakpoint.id);
+    }
+	
+	@Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
+    @Override
+    public String toString() {
+		return id + ": " + lineNumber;
+	}
+
 	public Long getId() {
 		return id;
 	}

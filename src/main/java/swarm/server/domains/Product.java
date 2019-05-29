@@ -8,35 +8,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Transient;
 
 
 @Entity
-public class Developer implements Serializable{
+public class Product implements Serializable{
 	
-	private static final long serialVersionUID = -8377345229493337082L;
+	private static final long serialVersionUID = 5471887306464491390L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
 	@Column(nullable = false)
 	String name;
 	
-	String color;
-	
 	@Column(name="CREATION_TS", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable=false, updatable=false)
 	private Calendar timestamp;
-	
-	@Transient
-	boolean logged;
-	
-	public Developer(String name, String color) {
+
+	public Product(String name) {
 		this.name = name;
-		this.color = color;
 	}
 	
-	public Developer() {}
+	public Product() {}
 
 	public Long getId() {
 		return id;
@@ -53,31 +46,15 @@ public class Developer implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
-	}
-
-	public boolean isLogged() {
-		return logged;
-	}
-
-	public void setLogged(boolean logged) {
-		this.logged = logged;
-	}
 	
 	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Developer developer = (Developer) o;
+        Product product = (Product) o;
 
-        return id.equals(developer.id);
+        return id.equals(product.id);
     }
 	
 	@Override
@@ -89,5 +66,4 @@ public class Developer implements Serializable{
     public String toString() {
 		return id + ": " + name;
 	}
-
 }

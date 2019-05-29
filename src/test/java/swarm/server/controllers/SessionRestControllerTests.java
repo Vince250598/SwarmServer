@@ -1,4 +1,4 @@
-package swarm.server.controllers;
+/*package swarm.server.controllers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -33,4 +33,4 @@ public class SessionRestControllerTests {
 	public void findByProjectAndDev() throws Exception {
 		this.mvc.perform(get("/sessions/find?projectId=2&developerId=1")).andReturn().toString().contains("A");
 	}
-}
+}*/

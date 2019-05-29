@@ -1,21 +1,26 @@
 package swarm.server.domains;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
+
 @Entity
-public class Invocation implements Serializable {
+public class Invocation implements Serializable{
+	
 	private static final long serialVersionUID = 8724123547818474005L;
 
 	@Id
-	@GeneratedValue
-	private Long id;
-
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
+	
 	@ManyToOne(optional = false)
 	private Method invoking;
 
@@ -25,8 +30,20 @@ public class Invocation implements Serializable {
 	@ManyToOne(optional = false)
 	private Session session;
 	
+	@Column(name="CREATION_TS", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable=false, updatable=false)
+	private Calendar timestamp;
+	
 	@Transient
-	private boolean isVitual;
+	private boolean isVirtual;
+	
+	public Invocation () {}
+	
+	public Invocation(Method invoking, Method invoked, Session session, boolean isVirtual) {
+		this.invoking = invoking;
+		this.invoked = invoked;
+		this.session = session;
+		this.isVirtual = isVirtual;
+	}
 	
 	public Long getId() {
 		return id;
@@ -60,16 +77,32 @@ public class Invocation implements Serializable {
 		this.session = session;
 	}
 	
-	public String toString() {
-		return invoking.getId() + ": " + invoking.getKey() + " -> " + invoked.getId() + ": " + invoked.getKey();
-	}
-	
 	public boolean isVirtual() {
-		return this.isVitual;
+		return this.isVirtual;
 	}
 	
 	public void setVirtual(boolean virtual) {
-		this.isVitual = virtual;
+		this.isVirtual = virtual;
+	}
+	
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Invocation invocation = (Invocation) o;
+
+        return id.equals(invocation.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+	
+    @Override
+	public String toString() {
+		return invoking.getId() + ": " + invoking.getKey() + " -> " + invoked.getId() + ": " + invoked.getKey();
 	}
 	
 }
