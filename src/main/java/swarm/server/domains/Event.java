@@ -1,20 +1,25 @@
 package swarm.server.domains;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+
 @Entity
-public class Event implements Serializable {
+public class Event implements Serializable{
+
 	private static final long serialVersionUID = 4778378924903070737L;
 
 	@Id
-	@GeneratedValue
-	private Long id;
-
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
+	
 	@ManyToOne(optional = false)
 	private Method method;
 
@@ -30,7 +35,22 @@ public class Event implements Serializable {
 	String detail;
 
 	String kind;
-
+	
+	@Column(name="CREATION_TS", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable=false, updatable=false)
+	private Calendar timestamp;
+	
+	public Event () {}
+	
+	public Event(Method method, Session session, String charStart, String charEnd, Integer lineNumber, String detail, String kind) {
+		this.method = method;
+		this.session = session;
+		this.charStart = charStart;
+		this.charEnd = charEnd;
+		this.lineNumber = lineNumber;
+		this.detail = detail;
+		this.kind = kind;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -94,4 +114,25 @@ public class Event implements Serializable {
 	public void setKind(String kind) {
 		this.kind = kind;
 	}
+	
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Event event = (Event) o;
+
+        return id.equals(event.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
+    @Override
+    public String toString() {
+		return id + ": " + detail;
+	}
+	
 }

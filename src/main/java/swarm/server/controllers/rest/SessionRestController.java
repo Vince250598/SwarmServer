@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import swarm.server.domains.Method;
+import swarm.server.domains.Session;
+import swarm.server.services.MethodService;
 import swarm.server.services.SessionService;
 
 @RestController
@@ -12,9 +15,12 @@ public class SessionRestController {
 	@Autowired
 	private SessionService service;
 	
+	@Autowired
+	private MethodService methodService;
+	
 	@RequestMapping("/sessions/find")
-    public String findSessions(Long projectId, Long developerId) {
-		return service.findSessions(projectId, developerId);
+    public Iterable<Session> findSessions(Long taskId, Long developerId) {
+		return service.sessionsByTaskIdAndDeveloperId(taskId, developerId);
     }	
 	
 	@RequestMapping("/sessions/graph")
@@ -38,12 +44,12 @@ public class SessionRestController {
     }
 
 	@RequestMapping("/sessions/startingMethods")
-    public String getStartingMethods(Long sessionId) {
-		return service.getStartingMethods(sessionId);
+    public Iterable<Method> getStartingMethods(Long sessionId) {
+		return methodService.startingMethodsBySessionId(sessionId);
     }
 	
 	@RequestMapping("/sessions/endingMethods")
-    public String getEndingMethods(Long sessionId) {
-		return service.getEndingMethods(sessionId);
+    public Iterable<Method> getEndingMethods(Long sessionId) {
+		return methodService.endingMethodsBySessionId(sessionId);
     }
 }

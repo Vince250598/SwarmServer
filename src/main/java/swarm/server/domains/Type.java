@@ -1,20 +1,24 @@
 package swarm.server.domains;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+
 @Entity
-public class Type implements Serializable {
+public class Type implements Serializable{
+
 	private static final long serialVersionUID = -7812590943533400550L;
 
 	@Id
-	@GeneratedValue
-	private Long id;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
 	
 	@ManyToOne(optional = false)
 	private Namespace namespace;
@@ -31,9 +35,23 @@ public class Type implements Serializable {
 	@Column(nullable = false)
 	String name;
 	
-	@Column(length = 1000000)
-	String source;
+	@ManyToOne
+	private Artefact artefact;
 
+	@Column(name="CREATION_TS", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable=false, updatable=false)
+	private Calendar timestamp;
+	
+	public Type () {}
+	
+	public Type(Namespace namespace, Session session, String fullName, String fullPath, String name, Artefact artefact) {
+		this.namespace = namespace;
+		this.session = session;
+		this.fullName = fullName;
+		this.fullPath = fullPath;
+		this.name = name;
+		this.artefact = artefact;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -82,11 +100,32 @@ public class Type implements Serializable {
 		this.name = name;
 	}
 
-	public String getSource() {
-		return source;
+	public Artefact getArtefact() {
+		return artefact;
 	}
 
-	public void setSource(String source) {
-		this.source = source;
+	public void setArtefact(Artefact artefact) {
+		this.artefact = artefact;
 	}
+	
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Type type = (Type) o;
+
+        return id.equals(type.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
+    @Override
+    public String toString() {
+		return id + ": " + fullName;
+	}
+	
 }
