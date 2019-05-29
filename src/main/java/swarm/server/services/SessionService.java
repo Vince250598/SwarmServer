@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,13 +44,24 @@ public class SessionService {
 		this.methodRepository = methodRepository;
 		this.invocationRepository = invocationRepository;
 	}
+	
+	@GraphQLMutation //To update started or finished time of sessions
+	public Session updateSession(@GraphQLArgument(name = "id") Long id,
+			@GraphQLArgument(name = "started") Date started, @GraphQLArgument(name = "finished") Date finished ) {
+		Session session = sessionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
+		if(started == null) {
+			session.setFinished(finished);
+		}else if (finished == null) {
+			session.setStarted(started);
+		}
+		return sessionRepository.save(session);
+	}
 
 	@GraphQLMutation //started and finished necessary?
 	public Session createSession(@GraphQLArgument(name = "developer") Developer developer, @GraphQLArgument(name = "task") Task task,
 			@GraphQLArgument(name = "description") String description, @GraphQLArgument(name = "label") String label,
-			@GraphQLArgument(name = "purpose") String purpose, @GraphQLArgument(name = "project") String project,
-			@GraphQLArgument(name = "started") Date started, @GraphQLArgument(name = "finished") Date finished) {
-		return sessionRepository.save(new Session(developer, task, description,label,purpose,project,started,finished));
+			@GraphQLArgument(name = "purpose") String purpose, @GraphQLArgument(name = "project") String project) {
+		return sessionRepository.save(new Session(developer, task, description,label,purpose,project));
 	}
 	
 	@GraphQLQuery

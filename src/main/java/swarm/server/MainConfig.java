@@ -84,10 +84,8 @@ public class MainConfig {
 			Task task1 = new Task(product1, "task1.title","task1.url","task1.color");
 			Task task2 = new Task(product2, "task2.title","task2.url","task2.color");
 			
-			Date date = new Date();
-			
-			Session session1 = new Session(developer1, task1, "session1.description", "session1.label","session1.purpose","session1.project",date,date);
-			Session session2 = new Session(developer2, task2, "session2.description", "session2.label","session2.purpose","session2.project",date,date);
+			Session session1 = new Session(developer1, task1, "session1.description", "session1.label","session1.purpose","session1.project");
+			Session session2 = new Session(developer2, task2, "session2.description", "session2.label","session2.purpose","session2.project");
 			
 			Namespace namespace1 = new Namespace("namespace1.name","namespace1.fullPath");
 			Namespace namespace2 = new Namespace("namespace2.name","namespace2.fullPath");

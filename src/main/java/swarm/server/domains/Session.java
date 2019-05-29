@@ -10,8 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 
 @Entity
@@ -40,23 +38,19 @@ public class Session implements Serializable{
 	@Column(name="CREATION_TS", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable=false, updatable=false)
 	private Calendar timestamp;
 	
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date started;
 	
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date finished;
 	
 	public Session () {}
 	
-	public Session(Developer developer, Task task, String description, String label, String purpose, String project, Date started, Date finished) {
+	public Session(Developer developer, Task task, String description, String label, String purpose, String project) {
 		this.developer = developer;
 		this.task = task;
 		this.description = description;
 		this.label = label;
 		this.purpose = purpose;
 		this.project = project;
-		this.started = started;
-		this.finished = finished;
 	}
 	
 	public Long getId() {
