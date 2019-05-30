@@ -32,8 +32,6 @@ public class MainConfig {
 }*/
 package swarm.server;
 
-import java.util.Date;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -69,14 +67,14 @@ public class MainConfig {
 					"        System.out.println(\"Hello, World\");\r\n" + 
 					"    }\r\n" + 
 					"\r\n" + 
-					"}", 1L);
+					"}");
 			Artefact artefact2 = new Artefact("class ForLoopExample2 {\r\n" + 
 					"    public static void main(String args[]){\r\n" + 
 					"         for(int i=1; i>=1; i++){\r\n" + 
 					"              System.out.println(\"The value of i is: \"+i);\r\n" + 
 					"         }\r\n" + 
 					"    }\r\n" + 
-					"}", 4L);
+					"}");
 			
 			Product product1 = new Product("product1.name");
 			Product product2 = new Product("product2.name");

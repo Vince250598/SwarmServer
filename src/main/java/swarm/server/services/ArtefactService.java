@@ -34,8 +34,8 @@ public class ArtefactService {
 	}
 	
 	@GraphQLMutation
-	public Artefact createArtefact(@GraphQLArgument(name = "sourceCode") String sourceCode, @GraphQLArgument(name = "version") Long version) {
-		return artefactRepository.save(new Artefact(sourceCode, version));
+	public Artefact createArtefact(@GraphQLArgument(name = "sourceCode") String sourceCode) {
+		return artefactRepository.save(new Artefact(sourceCode));
 	}
 
 }

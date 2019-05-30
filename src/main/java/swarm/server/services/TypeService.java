@@ -1,7 +1,5 @@
 package swarm.server.services;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,23 +32,27 @@ public class TypeService {
 			@GraphQLArgument(name = "fullName") String fullName, @GraphQLArgument(name = "fullPath") String fullPath, 
 			@GraphQLArgument(name = "name") String name, @GraphQLArgument(name = "source") String sourceCode) {
 
-		Artefact artefact = artefactRepository.findBySourceCode(sourceCode);
+		Type type = new Type();
+		type.setNamespace(namespace);
+		type.setSession(session);
+		type.setFullName(fullName);
+		type.setFullPath(fullPath);
+		type.setName(name);
 		
-		if(artefact == null) {
-			artefact = new Artefact(sourceCode, 1L); //change for incremental version?
-			artefactRepository.save(artefact);
+		int typeHash = type.hashCode(sourceCode);
+		
+		Artefact artefact = artefactRepository.findByTypeHash(typeHash);
+		
+		if (artefact == null) {
+			artefact = new Artefact(sourceCode);
+			artefact.setTypeHash(typeHash);
 		}
-
-
-		return typeRepository.save(new Type(namespace, session, fullName, fullPath, name, artefact));
+		
+		artefactRepository.save(artefact);
+		type.setArtefact(artefact);
+		
+		return typeRepository.save(type);
 	}
-	
-	/*@GraphQLMutation
-	public Type createType(@GraphQLArgument(name = "namespace") Namespace namespace, @GraphQLArgument(name = "session") Session session, 
-			@GraphQLArgument(name = "fullName") String fullName, @GraphQLArgument(name = "fullPath") String fullPath, 
-			@GraphQLArgument(name = "name") String name, @GraphQLArgument(name = "artefact") Artefact artefact) {
-		return typeRepository.save(new Type(namespace, session, fullName, fullPath, name, artefact));
-	}*/
 	
 	@GraphQLQuery
 	public Iterable<Type> typesBySessionId(@GraphQLArgument(name = "sessionId") Long sessionId){

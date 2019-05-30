@@ -22,16 +22,16 @@ public class Artefact implements Serializable{
 	String sourceCode;
 	
 	@Column(nullable=false)
-	Long version;
+	int typeHash;
 	
 	@Column(name="CREATION_TS", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable=false, updatable=false)
 	private Calendar timestamp;
 	
 	public Artefact() {}
 	
-	public Artefact(String sourceCode, Long version) {
+	public Artefact(String sourceCode) {
 		this.sourceCode = sourceCode;
-		this.version = version;
+		this.typeHash = -1;
 	}
 	
 	@Override
@@ -71,12 +71,12 @@ public class Artefact implements Serializable{
 		this.sourceCode = sourceCode;
 	}
 
-	public Long getVersion() {
-		return version;
+	public int getTypeHash() {
+		return typeHash;
 	}
 
-	public void setVersion(Long version) {
-		this.version = version;
+	public void setTypeHash(int typeHash) {
+		this.typeHash = typeHash;
 	}
 
 }
