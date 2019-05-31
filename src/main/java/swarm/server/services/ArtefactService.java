@@ -23,6 +23,14 @@ public class ArtefactService {
 		this.artefactRepository = artefactRepository;
 	}
 	
+	public Artefact save(Artefact artefact) {
+		return artefactRepository.save(artefact);
+	}
+	
+	public Artefact artefactByTypeHash(int typeHash) {
+		return artefactRepository.findByTypeHash(typeHash);
+	}
+	
 	@GraphQLQuery
 	public Iterable<Artefact> allArtefacts() {
         return artefactRepository.findAll();
