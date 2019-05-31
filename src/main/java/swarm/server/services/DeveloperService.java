@@ -1,5 +1,7 @@
 package swarm.server.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,10 @@ public class DeveloperService {
 	@Autowired
 	public DeveloperService(DeveloperRepository developerRepository) {
 		this.developerRepository = developerRepository;
+	}
+	
+	public Optional<Developer> developerById(Long id) {
+		return developerRepository.findById(id);
 	}
 	
 	@GraphQLQuery

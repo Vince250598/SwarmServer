@@ -39,6 +39,10 @@ public class TaskService {
 		this.typeRepository = typeRepository;
 		this.breakpointRepository = breakpointRepository;
 	}
+	
+	public Task save(Task task) {
+		return taskRepository.save(task);
+	}
 
 	@GraphQLMutation
 	public Task createTask(@GraphQLArgument(name = "product") Product product, @GraphQLArgument(name = "title") String title,

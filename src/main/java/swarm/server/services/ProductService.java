@@ -33,6 +33,18 @@ public class ProductService {
 		this.typeRepository = typeRepository;
 	}
 	
+	public Iterable<Product> allProduct() {
+		return productRepository.findAll();
+	}
+	
+	public Optional<Product> productById(Long id) {
+		return productRepository.findById(id);
+	}
+	
+	public Product save(Product product) {
+		return productRepository.save(product);
+	}
+	
 	@GraphQLMutation
 	public Product createProduct(@GraphQLArgument(name = "name") String name) {
 		return productRepository.save(new Product(name));

@@ -45,6 +45,22 @@ public class SessionService {
 		this.invocationRepository = invocationRepository;
 	}
 	
+	public Optional<Session> sessionById(Long id) {
+		return sessionRepository.findById(id);
+	}
+	
+	public Iterable<Session> allSessions() {
+		return sessionRepository.findAll();
+	}
+	
+	public Iterable<Optional<Session>> sessionsByTaskId(Long taskId) {
+		return sessionRepository.findByTask(taskId);
+	}
+	
+	public Session save(Session session) {
+		return sessionRepository.save(session);
+	}
+	
 	@GraphQLMutation //To update started or finished time of sessions
 	public Session updateSession(@GraphQLArgument(name = "id") Long id,
 			@GraphQLArgument(name = "started") Date started, @GraphQLArgument(name = "finished") Date finished ) {
@@ -65,7 +81,7 @@ public class SessionService {
 	}
 	
 	@GraphQLQuery
-	public Iterable<Session> sessionsByTaskIdAndDeveloperId(@GraphQLArgument(name = "taskId") Long taskId, @GraphQLArgument(name = "developerId") Long developerId){
+	public Iterable<Optional<Session>> sessionsByTaskIdAndDeveloperId(@GraphQLArgument(name = "taskId") Long taskId, @GraphQLArgument(name = "developerId") Long developerId){
     	return sessionRepository.findByTaskAndDeveloper(taskId, developerId);
     }
 
@@ -356,7 +372,7 @@ public class SessionService {
 	public String getGraphDataByTaskId(@GraphQLArgument(name = "taskId") Long taskId) {
 		String graph = "[";
 		
-		List<Optional<Session>> sessions = sessionRepository.findByTask(taskId);
+		Iterable<Optional<Session>> sessions = sessionRepository.findByTask(taskId);
 		for (Optional<Session> session : sessions) {
 			graph += getGraphData(session, false, false);
 		}

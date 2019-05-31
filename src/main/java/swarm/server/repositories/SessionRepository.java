@@ -14,9 +14,9 @@ import swarm.server.domains.Session;
 public interface SessionRepository extends JpaRepository<Session, Long> {
 
 	@Query("Select s from Session s Where task.id = :taskId and developer.id = :developerId ")
-	List<Session> findByTaskAndDeveloper(@Param("taskId") Long taskId, @Param("developerId") Long developerId);
+	Iterable<Optional<Session>> findByTaskAndDeveloper(@Param("taskId") Long taskId, @Param("developerId") Long developerId);
 	
 	@Query("Select s from Session s Where task.id = :taskId")
-	List<Optional<Session>> findByTask(@Param("taskId") Long taskId);
+	Iterable<Optional<Session>> findByTask(@Param("taskId") Long taskId);
 	
 }

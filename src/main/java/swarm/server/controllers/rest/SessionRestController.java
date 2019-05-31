@@ -1,6 +1,13 @@
 package swarm.server.controllers.rest;
 
+import java.util.Optional;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,34 +20,38 @@ import swarm.server.services.SessionService;
 public class SessionRestController {
 
 	@Autowired
-	private SessionService service;
+	private SessionService sessionService;
 	
 	@Autowired
 	private MethodService methodService;
 	
 	@RequestMapping("/sessions/find")
-    public Iterable<Session> findSessions(Long taskId, Long developerId) {
-		return service.sessionsByTaskIdAndDeveloperId(taskId, developerId);
-    }	
+    public Iterable<Optional<Session>> findSessionsByTaskIdAndDeveloperId(Long taskId, Long developerId) {
+		if(developerId == null) {
+			return sessionService.sessionsByTaskId(taskId);
+		} else {
+			return sessionService.sessionsByTaskIdAndDeveloperId(taskId, developerId);
+		}
+    }
 	
 	@RequestMapping("/sessions/graph")
     public String getGraphData(Long sessionId, boolean addType) {
-		return service.getGraphData(sessionId, addType);
+		return sessionService.getGraphData(sessionId, addType);
     }
 	
 	@RequestMapping("/sessions/stack")
     public String getStackData(Long sessionId) {
-		return service.getStackData(sessionId);
+		return sessionService.getStackData(sessionId);
     }
 
 	@RequestMapping("/sessions/interPathEdges")
     public String getInterPathEdges(Long sessionId) {
-		return service.getInterPathEdges(sessionId);
+		return sessionService.getInterPathEdges(sessionId);
     }
 	
 	@RequestMapping("/sessions/countElements")
     public int countElements(Long sessionId) {
-		return service.countElements(sessionId);
+		return sessionService.countElements(sessionId);
     }
 
 	@RequestMapping("/sessions/startingMethods")
@@ -52,4 +63,20 @@ public class SessionRestController {
     public Iterable<Method> getEndingMethods(Long sessionId) {
 		return methodService.endingMethodsBySessionId(sessionId);
     }
+	
+	@PostMapping("/sessions")
+	public Session newSession(@RequestBody Session session) {
+		return sessionService.save(session);
+	}
+	
+	@RequestMapping("/sessions/all")
+	public Iterable<Session> allSessions() {
+		return sessionService.allSessions();
+	}
+	
+	@PutMapping("/sessions/{id}") //The date format is yyyy-MM-dd@HH:mm:ss.SSSZ
+	public Session updateSession(@PathVariable Long id , @RequestBody Session session) {
+		session.setId(id);
+		return sessionService.save(session);
+	}
 }

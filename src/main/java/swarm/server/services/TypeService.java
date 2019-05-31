@@ -1,5 +1,7 @@
 package swarm.server.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,14 @@ public class TypeService {
 	public TypeService(TypeRepository typeRepository, ArtefactRepository artefactRepository) {
 		this.typeRepository = typeRepository;
 		this.artefactRepository = artefactRepository;
+	}
+	
+	public Optional<Type> typeById(Long id) {
+		return typeRepository.findById(id);
+	}
+	
+	public Type save(Type type) {
+		return typeRepository.save(type);
 	}
 	
 	@GraphQLMutation

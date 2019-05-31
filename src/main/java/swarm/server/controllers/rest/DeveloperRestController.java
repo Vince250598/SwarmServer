@@ -1,6 +1,9 @@
 package swarm.server.controllers.rest;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +23,19 @@ public class DeveloperRestController {
 		return developerService.login(name);
     }
 	
-	@PostMapping("developers")
+	@PostMapping("/developers")
 	public Developer newDeveloper(@RequestBody Developer newDeveloper) {
 		return developerService.save(newDeveloper);
 	}
+	
+	@RequestMapping("/developers/{id}")
+	public Optional<Developer> developerById(@PathVariable Long id) {
+		return developerService.developerById(id);
+	}
+	
+	@RequestMapping("/developers")
+	public Iterable<Developer> allDevelopers() {
+		return developerService.allDevelopers();
+	}
+	
 }

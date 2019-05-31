@@ -24,6 +24,10 @@ public class InvocationService {
 		this.invocationRepository = invocationRepository;
 	}
 	
+	public Invocation save(Invocation invocation) {
+		return invocationRepository.save(invocation);
+	}
+	
 	@GraphQLMutation
 	public Invocation createInvocation(@GraphQLArgument(name = "invoking") Method invoking, @GraphQLArgument(name = "invoked") Method invoked, 
 			@GraphQLArgument(name = "session") Session session, @GraphQLArgument(name = "isVirtual") boolean isVirtual) {

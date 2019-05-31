@@ -22,6 +22,10 @@ public class EventService {
 		this.eventRepository = eventRepository;
 	}
 	
+	public Event save(Event event) {
+		return eventRepository.save(event);
+	}
+	
 	@GraphQLMutation
 	public Event createEvent(@GraphQLArgument(name = "method") Method method, @GraphQLArgument(name = "session") Session session, 
 			@GraphQLArgument(name = "charStart") String charStart, @GraphQLArgument(name = "charEnd") String charEnd, 

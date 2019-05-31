@@ -29,6 +29,14 @@ public class BreakpointService {
 		this.productRepository = productRepo;
 	}
 	
+	public Breakpoint save(Breakpoint breakpoint) {
+		return breakpointRepository.save(breakpoint);
+	}
+	
+	public Optional<Breakpoint> findById(Long id) {
+		return breakpointRepository.findById(id);
+	}
+	
 	@GraphQLMutation
 	public Breakpoint createBreakpoint(@GraphQLArgument(name = "type") Type type, @GraphQLArgument(name = "charStart") String charStart, 
 			@GraphQLArgument(name = "charEnd") String charEnd, @GraphQLArgument(name = "lineNumber") Integer lineNumber) {

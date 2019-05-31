@@ -1,5 +1,7 @@
 package swarm.server.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,14 @@ public class NamespaceService {
 	@Autowired
 	public NamespaceService(NamespaceRepository namespaceRepository) {
 		this.namespaceRepository = namespaceRepository;
+	}
+	
+	public Namespace save(Namespace namespace) {
+		return namespaceRepository.save(namespace);
+	}
+	
+	public Optional<Namespace> namespaceById(Long id) {
+		return namespaceRepository.findById(id);
 	}
 
 	@GraphQLQuery

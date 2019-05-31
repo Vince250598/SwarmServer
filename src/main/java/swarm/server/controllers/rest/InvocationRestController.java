@@ -1,6 +1,8 @@
 package swarm.server.controllers.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,5 +18,10 @@ public class InvocationRestController {
 	@RequestMapping("invocations/getInvocationsByMethods")
     public Iterable<Invocation> getInvocationsByMethods(Long sessionId, Long invokingId, Long invokedId) {
 		return invocationService.getInvocationsByMethods(sessionId, invokingId, invokedId);
-    }	
+    }
+	
+	@PostMapping("/invocations")
+	public Invocation newInvocation(@RequestBody Invocation invocation) {
+		return invocationService.save(invocation);
+	}
 }

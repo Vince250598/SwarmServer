@@ -28,6 +28,14 @@ public class MethodService {
 		this.sessionRepository = sessionRepository;
 	}
 	
+	public Optional<Method> methodById(Long id) {
+		return methodRepository.findById(id);
+	}
+	
+	public Method save(Method method) {
+		return methodRepository.save(method);
+	}
+	
 	@GraphQLMutation
 	public Method createMethod(@GraphQLArgument(name = "type") Type type, @GraphQLArgument(name = "key") String key, 
 			@GraphQLArgument(name = "name") String name, @GraphQLArgument(name = "signature") String signature) {
