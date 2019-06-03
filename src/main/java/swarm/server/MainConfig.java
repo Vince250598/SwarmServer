@@ -1,18 +1,22 @@
-/*package swarm.server;
+package swarm.server;
 
 import java.net.URI;
 
-import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.commons.dbcp2.BasicDataSource;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import swarm.server.domains.*;
+import swarm.server.repositories.*;
+
 @Configuration
 public class MainConfig {
-
-    @Bean
-    public BasicDataSource dataSource() throws Exception {
-    	String databaseURL = System.getenv("DATABASE_URL");
-    	if(databaseURL != null) {
+	
+	/*@Bean
+	public BasicDataSource dataSource() throws Exception {
+		String databaseURL = System.getenv("DATABASE_URL");
+		if(databaseURL != null) {
             URI dbUri = new URI(databaseURL);
 
             String username = dbUri.getUserInfo().split(":")[0];
@@ -28,19 +32,7 @@ public class MainConfig {
     	} else {
     		throw new Exception("Environment var DATABASE_URL is not defined in your system.");
     	}
-    }
-}*/
-package swarm.server;
-
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-import swarm.server.domains.*;
-import swarm.server.repositories.*;
-
-@Configuration
-public class MainConfig {
+	}*/
 	
 	@Bean
 	public CommandLineRunner test(
