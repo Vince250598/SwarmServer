@@ -52,7 +52,7 @@ public class MainConfig {
 			Developer developer1 = new Developer("Jean-Guy", "developer1.color");
 			Developer developer2 = new Developer("Robert", "developer2.color");
 			
-			Artefact artefact1 = new Artefact("public class HelloWorld {\r\n" + 
+			/*Artefact artefact1 = new Artefact("public class HelloWorld {\r\n" + 
 					"\r\n" + 
 					"    public static void main(String[] args) {\r\n" + 
 					"        // Prints \"Hello, World\" to the terminal window.\r\n" + 
@@ -66,7 +66,7 @@ public class MainConfig {
 					"              System.out.println(\"The value of i is: \"+i);\r\n" + 
 					"         }\r\n" + 
 					"    }\r\n" + 
-					"}");
+					"}");*/
 			
 			Product product1 = new Product("product1.name");
 			Product product2 = new Product("product2.name");
@@ -80,23 +80,23 @@ public class MainConfig {
 			Namespace namespace1 = new Namespace("namespace1.name","namespace1.fullPath");
 			Namespace namespace2 = new Namespace("namespace2.name","namespace2.fullPath");
 			
-			Type type1 = new Type(namespace1, session1, "type1.fullName","type1.fullPath", "type1.name",artefact1);
-			Type type2 = new Type(namespace2, session2, "type2.fullName","type2.fullPath", "type2.name",artefact2);
+			/*Type type1 = new Type(namespace1, session1, "type1.fullName","type1.fullPath", "type1.name",artefact1);
+			Type type2 = new Type(namespace2, session2, "type2.fullName","type2.fullPath", "type2.name",artefact2);*/
 			
-			Breakpoint breakpoint1 = new Breakpoint(type1,"breakpoint1.start","breakpoint1.end",59);
+			/*Breakpoint breakpoint1 = new Breakpoint(type1,"breakpoint1.start","breakpoint1.end",59);
 			Breakpoint breakpoint2 = new Breakpoint(type2,"breakpoint2.start","breakpoint2.end",374);
+			*/
+			/*Method method1 = new Method(type1,"method1.key","method1.name","method1.signature");
+			Method method2 = new Method(type2,"method2.key","method2.name","method2.signature");*/
 			
-			Method method1 = new Method(type1,"method1.key","method1.name","method1.signature");
-			Method method2 = new Method(type2,"method2.key","method2.name","method2.signature");
+			/*Invocation invocation1 = new Invocation(method1,method2,session1,false);
 			
-			Invocation invocation1 = new Invocation(method1,method2,session1,false);
-			
-			Event event1 = new Event(method2,session2,"event1.charStart","event1.charEnd",349,"event1.detail","event1.kind");
+			Event event1 = new Event(method2,session2,"event1.charStart","event1.charEnd",349,"event1.detail","event1.kind");*/
 			
 			developerRepository.save(developer1);
 			developerRepository.save(developer2);
-			artefactRepository.save(artefact1);
-			artefactRepository.save(artefact2);
+			/*artefactRepository.save(artefact1);
+			artefactRepository.save(artefact2);*/
 			productRepository.save(product1);
 			productRepository.save(product2);
 			taskRepository.save(task1);
@@ -105,18 +105,15 @@ public class MainConfig {
 			sessionRepository.save(session2);
 			namespaceRepository.save(namespace1);
 			namespaceRepository.save(namespace2);
-			typeRepository.save(type1);
-			typeRepository.save(type2);
-			breakpointRepository.save(breakpoint1);
-			breakpointRepository.save(breakpoint2);
-			methodRepository.save(method1);
+			/*typeRepository.save(type1);
+			typeRepository.save(type2);*/
+			/*breakpointRepository.save(breakpoint1);
+			breakpointRepository.save(breakpoint2);*/
+			/*methodRepository.save(method1);
 			methodRepository.save(method2);
 			invocationRepository.save(invocation1);
-			eventRepository.save(event1);
+			eventRepository.save(event1);*/
 		};
 	}
-		
-	
-
 }
 

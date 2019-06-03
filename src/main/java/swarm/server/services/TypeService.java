@@ -13,6 +13,7 @@ import swarm.server.domains.Artefact;
 import swarm.server.domains.Namespace;
 import swarm.server.domains.Session;
 import swarm.server.domains.Type;
+import swarm.server.domains.TypeWrapper;
 import swarm.server.repositories.ArtefactRepository;
 import swarm.server.repositories.TypeRepository;
 
@@ -33,7 +34,23 @@ public class TypeService {
 		return typeRepository.findById(id);
 	}
 	
-	public Type save(Type type) {
+	public Type createTypeWithRest(TypeWrapper typeWrapper) {
+		
+		String source = typeWrapper.getSource();
+		Type type = typeWrapper.getType();
+		
+		int typeHash = typeWrapper.hashCode();
+		
+		Artefact artefact = artefactRepository.findByTypeHash(typeHash);
+		
+		if(artefact == null) {
+			artefact = new Artefact(source);
+			artefact.setTypeHash(typeHash);
+		}
+		
+		artefactRepository.save(artefact);
+		type.setArtefact(artefact);
+		
 		return typeRepository.save(type);
 	}
 	
@@ -41,7 +58,7 @@ public class TypeService {
 	public Type createType(@GraphQLArgument(name = "namespace") Namespace namespace, @GraphQLArgument(name = "session") Session session, 
 			@GraphQLArgument(name = "fullName") String fullName, @GraphQLArgument(name = "fullPath") String fullPath, 
 			@GraphQLArgument(name = "name") String name, @GraphQLArgument(name = "source") String sourceCode) {
-
+		
 		Type type = new Type();
 		type.setNamespace(namespace);
 		type.setSession(session);
@@ -49,7 +66,9 @@ public class TypeService {
 		type.setFullPath(fullPath);
 		type.setName(name);
 		
-		int typeHash = type.hashCode(sourceCode);
+		TypeWrapper typeWrapper = new TypeWrapper(type, sourceCode);
+		
+		int typeHash = typeWrapper.hashCode();
 		
 		Artefact artefact = artefactRepository.findByTypeHash(typeHash);
 		

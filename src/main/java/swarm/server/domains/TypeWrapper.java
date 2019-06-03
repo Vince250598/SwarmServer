@@ -1,6 +1,6 @@
 package swarm.server.domains;
 
-public class TypeWrapper {
+public class TypeWrapper { //For REST request to create a new type
 
 	private Type type;
 	
@@ -28,4 +28,11 @@ public class TypeWrapper {
 	public void setSource(String source) {
 			this.source = source;
 	}
+	
+	public int hashCode() {
+    	int hash = 7;
+    	hash = 31 * hash + (type.fullName == null ? 0 : type.fullName.hashCode());
+    	hash = 31 * hash + (source == null ? 0 : source.hashCode());
+    	return hash;
+    }
 }

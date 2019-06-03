@@ -74,7 +74,7 @@ public class SessionRestController {
 		return sessionService.allSessions();
 	}
 	
-	@PutMapping("/sessions/{id}") //The date format is yyyy-MM-dd@HH:mm:ss.SSSZ
+	@PutMapping("/sessions/{id}") //The date format is yyyy-MM-dd'T'HH:mm:ss'Z'
 	public Session updateSession(@PathVariable Long id , @RequestBody Session session) {
 		session.setId(id);
 		return sessionService.save(session);

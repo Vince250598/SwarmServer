@@ -122,13 +122,6 @@ public class Type implements Serializable{
     public int hashCode() {
         return id.hashCode();
     }
-    
-    public int hashCode(String sourceCode) {
-    	int hash = 7;
-    	hash = 31 * hash + (fullName == null ? 0 : fullName.hashCode());
-    	hash = 31 * hash + (sourceCode == null ? 0 : sourceCode.hashCode());
-    	return hash;
-    }
 
     @Override
     public String toString() {
