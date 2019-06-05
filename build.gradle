@@ -22,6 +22,9 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.7.RELEASE'
 }
 
+sourceCompatibility = '12'
+targetCompatibility = '12'
+
 compileJava {
 	options.compilerArgs << '-parameters'
 }

@@ -30,6 +30,10 @@ public class TypeService {
 		this.artefactRepository = artefactRepository;
 	}
 	
+	public Type typeByMethodId(Long methodId) {
+		return typeRepository.findByMethodId(methodId);
+	}
+	
 	public Optional<Type> typeById(Long id) {
 		return typeRepository.findById(id);
 	}

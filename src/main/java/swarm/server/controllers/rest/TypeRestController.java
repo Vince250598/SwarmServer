@@ -29,6 +29,11 @@ public class TypeRestController {
 		return typeService.createTypeWithRest(typeWrapper);	
 	}
 	
+	@RequestMapping("/methods/{methodId}/type")
+	public Type typeByMethodId(@PathVariable Long methodId) {
+		return typeService.typeByMethodId(methodId);
+	}
+	
 	@RequestMapping("/types/{id}")
 	public Optional<Type> typeById(@PathVariable Long id) {
 		return typeService.typeById(id);

@@ -26,4 +26,7 @@ public interface TypeRepository extends JpaRepository<Type, Long> {
 
 	@Query("Select t.fullName from Type t Where t.session.task.product = :product group by fullName order by t.fullName")
 	List<String> findFullNamesByProduct(@Param("product") Optional<Product> product);
+	
+	@Query("Select t from Type t, Method m where m.type.id = t.id and :methodId = m.id")
+	Type findByMethodId(@Param("methodId") Long methodId);
 }
