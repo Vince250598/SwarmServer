@@ -19,7 +19,7 @@ public class TypeRestController {
 	@Autowired
 	private TypeService typeService;
 		
-	@RequestMapping("/types/getBySessionId/")
+	@RequestMapping("/types/getBySessionId")
     public Iterable<Type> getBySessionId(Long sessionId) {
 		return typeService.typesBySessionId(sessionId);
     }
