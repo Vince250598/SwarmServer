@@ -32,5 +32,10 @@ public class ProductRestController {
 	public Iterable<Product> allProducts() {
 		return productService.allProduct();
 	}
+	
+	@RequestMapping("/graphByProduct.html")
+	public String graphByProduct(Long productId) {
+		return productService.getProductPaths(productId);
+	}
 
 }
