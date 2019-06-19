@@ -19,6 +19,7 @@ public class Artefact implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@Column(columnDefinition="text")
 	String sourceCode;
 	
 	@Column(nullable=false)

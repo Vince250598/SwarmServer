@@ -33,7 +33,7 @@ public class TaskRestController {
 		return taskService.allTasks();
 	}
 	
-	@RequestMapping
+	@RequestMapping("/tasks/{id}")
 	public Optional<Task> taskById(@PathVariable Long id) {
 		return taskService.taskById(id);
 	}

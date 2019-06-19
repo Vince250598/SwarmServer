@@ -34,7 +34,7 @@ public class SessionRestController {
 		}
     }
 	
-	@RequestMapping
+	@RequestMapping("/sessions/{id}")
 	public Optional<Session> sessionById(@PathVariable Long id) {
 		return sessionService.sessionById(id);
 	}
