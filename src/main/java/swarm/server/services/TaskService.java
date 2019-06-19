@@ -43,6 +43,10 @@ public class TaskService {
 	public Task save(Task task) {
 		return taskRepository.save(task);
 	}
+	
+	public Optional<Task> taskById(Long id) {
+		return taskRepository.findById(id);
+	}
 
 	@GraphQLMutation
 	public Task createTask(@GraphQLArgument(name = "product") Product product, @GraphQLArgument(name = "title") String title,

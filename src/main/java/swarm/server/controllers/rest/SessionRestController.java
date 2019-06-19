@@ -34,6 +34,11 @@ public class SessionRestController {
 		}
     }
 	
+	@RequestMapping
+	public Optional<Session> sessionById(@PathVariable Long id) {
+		return sessionService.sessionById(id);
+	}
+	
 	@RequestMapping("/sessions/graph")
     public String getGraphData(Long sessionId, boolean addType) {
 		return sessionService.getGraphData(sessionId, addType);
