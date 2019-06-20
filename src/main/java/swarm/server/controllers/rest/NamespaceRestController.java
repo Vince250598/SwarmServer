@@ -19,8 +19,8 @@ public class NamespaceRestController {
 	private NamespaceService namespaceService;
 	
 	@RequestMapping("/namespaces/findByFullPath")
-    public Namespace findbyFullPath(String fullPath) {
-		return namespaceService.namespaceByFullPath(fullPath);
+    public Optional<Namespace> findbyFullPath(String fullPath) {
+		return namespaceService.namespace(fullPath);
     }	
 	
 	@PostMapping("/namespaces")
@@ -30,7 +30,7 @@ public class NamespaceRestController {
 	
 	@RequestMapping("/namespaces/{id}")
 	public Optional<Namespace> namespaceById(@PathVariable Long id) {
-		return namespaceService.namespaceById(id);
+		return namespaceService.namespace(id);
 	}
 	
 }

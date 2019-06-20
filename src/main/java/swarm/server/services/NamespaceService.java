@@ -26,18 +26,20 @@ public class NamespaceService {
 	public Namespace save(Namespace namespace) {
 		return namespaceRepository.save(namespace);
 	}
+
+	@GraphQLMutation(name = "namespaceCreate", description = "create a new namespace")
+	public Namespace namespaceCreate(Namespace namespace) {
+		return namespaceRepository.save(namespace);
+	}
 	
-	public Optional<Namespace> namespaceById(Long id) {
+	@GraphQLQuery(name = "namespace", description= "find a namespace by its ID")
+	public Optional<Namespace> namespace(@GraphQLArgument(name = "id") Long id) {
 		return namespaceRepository.findById(id);
 	}
-
-	@GraphQLQuery
-	public Namespace namespaceByFullPath(@GraphQLArgument(name = "fullPath") String fullPath) {
+	
+	@GraphQLQuery(name = "namespace", description = "find a namespace by its fullPath")
+	public Optional<Namespace> namespace(@GraphQLArgument(name = "fullPath") String fullPath) {
 		return namespaceRepository.findByFullPath(fullPath);
-	} 
-
-	@GraphQLMutation
-	public Namespace createNamespace(@GraphQLArgument(name = "name") String name, @GraphQLArgument(name = "fullPath") String fullPath) {
-		return namespaceRepository.save(new Namespace(name, fullPath));
 	}
+	
 }
