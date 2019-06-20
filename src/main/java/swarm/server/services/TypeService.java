@@ -58,26 +58,16 @@ public class TypeService {
 		return typeRepository.save(type);
 	}
 	
-	@GraphQLMutation
-	public Type createType(@GraphQLArgument(name = "namespace") Namespace namespace, @GraphQLArgument(name = "session") Session session, 
-			@GraphQLArgument(name = "fullName") String fullName, @GraphQLArgument(name = "fullPath") String fullPath, 
-			@GraphQLArgument(name = "name") String name, @GraphQLArgument(name = "source") String sourceCode) {
-		
-		Type type = new Type();
-		type.setNamespace(namespace);
-		type.setSession(session);
-		type.setFullName(fullName);
-		type.setFullPath(fullPath);
-		type.setName(name);
-		
-		TypeWrapper typeWrapper = new TypeWrapper(type, sourceCode);
-		
+	@GraphQLMutation(name = "typeCreate")
+	public Type typeCreate(TypeWrapper typeWrapper) {
+		Type type = typeWrapper.getType();
+				
 		int typeHash = typeWrapper.hashCode();
 		
 		Artefact artefact = artefactRepository.findByTypeHash(typeHash);
 		
 		if (artefact == null) {
-			artefact = new Artefact(sourceCode);
+			artefact = new Artefact(typeWrapper.getSource());
 			artefact.setTypeHash(typeHash);
 		}
 		
@@ -87,7 +77,7 @@ public class TypeService {
 		return typeRepository.save(type);
 	}
 	
-	@GraphQLQuery
+	@GraphQLQuery(name = "types")
 	public Iterable<Type> typesBySessionId(@GraphQLArgument(name = "sessionId") Long sessionId){
     	return typeRepository.findBySessionId(sessionId);
     }

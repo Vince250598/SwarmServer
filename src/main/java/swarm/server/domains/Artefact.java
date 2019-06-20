@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import io.leangen.graphql.annotations.GraphQLIgnore;
+
 
 @Entity
 public class Artefact implements Serializable{
@@ -59,6 +61,7 @@ public class Artefact implements Serializable{
 		return id;
 	}
 
+	@GraphQLIgnore
 	public void setId(Long id) {
 		this.id = id;
 	}

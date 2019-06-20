@@ -29,26 +29,16 @@ public class BreakpointService {
 		this.productRepository = productRepo;
 	}
 	
-	public Breakpoint save(Breakpoint breakpoint) {
-		return breakpointRepository.save(breakpoint);
-	}
-	
 	public Optional<Breakpoint> findById(Long id) {
 		return breakpointRepository.findById(id);
 	}
 	
-	@GraphQLMutation
-	public Breakpoint createBreakpoint(@GraphQLArgument(name = "type") Type type, @GraphQLArgument(name = "charStart") String charStart, 
-			@GraphQLArgument(name = "charEnd") String charEnd, @GraphQLArgument(name = "lineNumber") Integer lineNumber) {
-		return breakpointRepository.save(new Breakpoint(type, charStart, charEnd, lineNumber));
+	@GraphQLMutation(name = "breakpointCreate")
+	public Breakpoint breakpointCreate(Breakpoint breakpoint) {
+		return breakpointRepository.save(breakpoint);
 	}
-	
-	@GraphQLQuery
-    public Iterable<Breakpoint> allBreakpoints() {
-        return breakpointRepository.findAll();
-    }
     
-	@GraphQLQuery
+	@GraphQLQuery(name = "breakpoint")
     public Iterable<Breakpoint> breakpointsByTaskId(@GraphQLArgument(name = "taskId") Long taskId){
 		return breakpointRepository.findByTaskId(taskId);
     }

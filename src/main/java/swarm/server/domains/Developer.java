@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
+import io.leangen.graphql.annotations.GraphQLIgnore;
+
 
 @Entity
 public class Developer implements Serializable{
@@ -42,6 +44,7 @@ public class Developer implements Serializable{
 		return id;
 	}
 
+	@GraphQLIgnore
 	public void setId(Long id) {
 		this.id = id;
 	}

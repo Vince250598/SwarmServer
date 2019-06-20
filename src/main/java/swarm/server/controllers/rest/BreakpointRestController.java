@@ -20,7 +20,7 @@ public class BreakpointRestController {
 	
 	@PostMapping("/breakpoints")
 	public Breakpoint newBreakpoint(@RequestBody Breakpoint breakpoint) {
-		return breakpointService.save(breakpoint);
+		return breakpointService.breakpointCreate(breakpoint);
 	}
 	
 	@RequestMapping("/breakpoints/{id}")

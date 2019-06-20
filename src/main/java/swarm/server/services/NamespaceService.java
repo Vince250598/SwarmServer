@@ -27,17 +27,17 @@ public class NamespaceService {
 		return namespaceRepository.save(namespace);
 	}
 
-	@GraphQLMutation(name = "namespaceCreate", description = "create a new namespace")
+	@GraphQLMutation(name = "namespaceCreate")
 	public Namespace namespaceCreate(Namespace namespace) {
 		return namespaceRepository.save(namespace);
 	}
 	
-	@GraphQLQuery(name = "namespace", description= "find a namespace by its ID")
+	@GraphQLQuery(name = "namespace")
 	public Optional<Namespace> namespace(@GraphQLArgument(name = "id") Long id) {
 		return namespaceRepository.findById(id);
 	}
 	
-	@GraphQLQuery(name = "namespace", description = "find a namespace by its fullPath")
+	@GraphQLQuery(name = "namespace")
 	public Optional<Namespace> namespace(@GraphQLArgument(name = "fullPath") String fullPath) {
 		return namespaceRepository.findByFullPath(fullPath);
 	}

@@ -22,13 +22,8 @@ public class ArtefactService {
 		this.artefactRepository = artefactRepository;
 	}
 	
-	@GraphQLQuery
-	public Iterable<Artefact> allArtefacts() {
-        return artefactRepository.findAll();
-    }
-	
-	@GraphQLQuery
-	public Optional<Artefact> artefactById(@GraphQLArgument(name = "artefactId") Long artefactId) {
-		return artefactRepository.findById(artefactId);
+	@GraphQLQuery(name = "artefact")
+	public Optional<Artefact> artefactById(@GraphQLArgument(name = "Id") Long Id) {
+		return artefactRepository.findById(Id);
 	}
 }

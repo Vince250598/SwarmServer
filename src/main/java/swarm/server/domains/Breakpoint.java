@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import io.leangen.graphql.annotations.GraphQLIgnore;
+
 
 @Entity
 public class Breakpoint implements Serializable{
@@ -68,6 +70,7 @@ public class Breakpoint implements Serializable{
 		return id;
 	}
 
+	@GraphQLIgnore
 	public void setId(Long id) {
 		this.id = id;
 	}
