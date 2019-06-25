@@ -10,8 +10,6 @@ import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 import swarm.server.domains.Artefact;
-import swarm.server.domains.Namespace;
-import swarm.server.domains.Session;
 import swarm.server.domains.Type;
 import swarm.server.domains.TypeWrapper;
 import swarm.server.repositories.ArtefactRepository;

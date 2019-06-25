@@ -9,8 +9,6 @@ import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 import swarm.server.domains.Invocation;
-import swarm.server.domains.Method;
-import swarm.server.domains.Session;
 import swarm.server.repositories.InvocationRepository;
 
 @Service
@@ -28,13 +26,12 @@ public class InvocationService {
 		return invocationRepository.save(invocation);
 	}
 	
-	@GraphQLMutation
-	public Invocation createInvocation(@GraphQLArgument(name = "invoking") Method invoking, @GraphQLArgument(name = "invoked") Method invoked, 
-			@GraphQLArgument(name = "session") Session session, @GraphQLArgument(name = "isVirtual") boolean isVirtual) {
-		return invocationRepository.save(new Invocation(invoking, invoked, session, isVirtual));
+	@GraphQLMutation(name = "invocationCreate")
+	public Invocation createInvocation(Invocation invocation) {
+		return invocationRepository.save(invocation);
 	}
 
-	@GraphQLQuery(name="getInvocationsByMethods")
+	@GraphQLQuery(name="invocations")
 	public Iterable<Invocation> getInvocationsByMethods(
 			@GraphQLArgument(name = "sessionId") Long sessionId, 
 			@GraphQLArgument(name = "invokingId") Long invokingId, 

@@ -116,6 +116,7 @@ public class Session implements Serializable{
 		return started;
 	}
 
+	@GraphQLIgnore
 	public void setStarted(Date started) {
 		this.started = started;
 	}
@@ -124,6 +125,7 @@ public class Session implements Serializable{
 		return finished;
 	}
 
+	@GraphQLIgnore
 	public void setFinished(Date finished) {
 		this.finished = finished;
 	}

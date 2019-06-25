@@ -12,7 +12,6 @@ import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 import swarm.server.domains.Breakpoint;
 import swarm.server.domains.Product;
-import swarm.server.domains.Type;
 import swarm.server.repositories.BreakpointRepository;
 import swarm.server.repositories.ProductRepository;
 

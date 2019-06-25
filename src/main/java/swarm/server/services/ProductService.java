@@ -45,9 +45,9 @@ public class ProductService {
 		return productRepository.save(product);
 	}
 	
-	@GraphQLMutation
-	public Product createProduct(@GraphQLArgument(name = "name") String name) {
-		return productRepository.save(new Product(name));
+	@GraphQLMutation(name = "productCreate")
+	public Product createProduct(Product product) {
+		return productRepository.save(product);
 	}
 	
 	@GraphQLQuery(name = "getProductPaths")

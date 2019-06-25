@@ -11,7 +11,6 @@ import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 import swarm.server.domains.Method;
 import swarm.server.domains.Session;
-import swarm.server.domains.Type;
 import swarm.server.repositories.MethodRepository;
 import swarm.server.repositories.SessionRepository;
 
@@ -35,27 +34,26 @@ public class MethodService {
 	public Method save(Method method) {
 		return methodRepository.save(method);
 	}
-	
-	@GraphQLMutation
-	public Method createMethod(@GraphQLArgument(name = "type") Type type, @GraphQLArgument(name = "key") String key, 
-			@GraphQLArgument(name = "name") String name, @GraphQLArgument(name = "signature") String signature) {
-		return methodRepository.save(new Method(type, key, name, signature));
+
+	@GraphQLMutation(name = "methodCreate")
+	public Method methodCreate(Method method) {
+		return methodRepository.save(method);
 	}
 
-	@GraphQLQuery
+	@GraphQLQuery(name = "methods")
 	public Iterable<Method> methodByTypeId(@GraphQLArgument(name = "typeId") Long typeId) {
 		return methodRepository.findByTypeId(typeId);
 	}
 	
-	@GraphQLQuery
+	@GraphQLQuery(name = "startingMethods")
     public Iterable<Method> startingMethodsBySessionId(@GraphQLArgument(name = "sessionId") Long sessionId){
     	Optional<Session> session = sessionRepository.findById(sessionId);
     	return methodRepository.getStartingMethods(session);
     }
     
-	@GraphQLQuery
+	@GraphQLQuery(name = "endingMethods")
     public Iterable<Method> endingMethodsBySessionId(@GraphQLArgument(name = "sessionId") Long sessionId){
-    	Optional<Session> session = sessionRepository.findById(sessionId);
+		Optional<Session> session = sessionRepository.findById(sessionId);
     	return methodRepository.getEndingMethods(session);
     }
 }

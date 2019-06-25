@@ -27,12 +27,12 @@ public class DeveloperService {
 		return developerRepository.findById(id);
 	}
 	
-	@GraphQLQuery
+	@GraphQLQuery(name = "developer")
 	public Developer login(@GraphQLArgument(name = "name") String name) {
 		return developerRepository.findByNameAllIgnoringCase(name);
 	}
 	
-	@GraphQLQuery
+	@GraphQLQuery(name = "developers")
 	public Iterable<Developer> allDevelopers() {
 		return developerRepository.findAll();
 	}
@@ -41,8 +41,8 @@ public class DeveloperService {
 		return developerRepository.save(developer);
 	}
 	
-	@GraphQLMutation
-	public Developer createDeveloper(@GraphQLArgument(name = "name") String name, @GraphQLArgument(name = "color") String color) {
-		return developerRepository.save(new Developer(name, color));
+	@GraphQLMutation(name = "developerCreate")
+	public Developer createDeveloper(Developer developer) {
+		return developerRepository.save(developer);
 	}
 }

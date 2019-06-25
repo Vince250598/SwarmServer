@@ -16,11 +16,9 @@ import io.leangen.graphql.annotations.GraphQLArgument;
 import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
-import swarm.server.domains.Developer;
 import swarm.server.domains.Invocation;
 import swarm.server.domains.Method;
 import swarm.server.domains.Session;
-import swarm.server.domains.Task;
 import swarm.server.domains.Type;
 import swarm.server.repositories.InvocationRepository;
 import swarm.server.repositories.MethodRepository;
@@ -61,7 +59,7 @@ public class SessionService {
 		return sessionRepository.save(session);
 	}
 	
-	@GraphQLMutation //To update started or finished time of sessions
+	@GraphQLMutation(name = "sessionUpdate") //To update started or finished time of sessions
 	public Session updateSession(@GraphQLArgument(name = "id") Long id,
 			@GraphQLArgument(name = "started") Date started, @GraphQLArgument(name = "finished") Date finished ) {
 		Session session = sessionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
@@ -73,14 +71,12 @@ public class SessionService {
 		return sessionRepository.save(session);
 	}
 
-	@GraphQLMutation //started and finished necessary?
-	public Session createSession(@GraphQLArgument(name = "developer") Developer developer, @GraphQLArgument(name = "task") Task task,
-			@GraphQLArgument(name = "description") String description, @GraphQLArgument(name = "label") String label,
-			@GraphQLArgument(name = "purpose") String purpose, @GraphQLArgument(name = "project") String project) {
-		return sessionRepository.save(new Session(developer, task, description,label,purpose,project));
+	@GraphQLMutation(name = "sessionCreate") //started and finished necessary?
+	public Session createSession(Session session) {
+		return sessionRepository.save(session);
 	}
 	
-	@GraphQLQuery
+	@GraphQLQuery(name = "sessions")
 	public Iterable<Optional<Session>> sessionsByTaskIdAndDeveloperId(@GraphQLArgument(name = "taskId") Long taskId, @GraphQLArgument(name = "developerId") Long developerId){
     	return sessionRepository.findByTaskAndDeveloper(taskId, developerId);
     }

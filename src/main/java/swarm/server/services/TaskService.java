@@ -14,7 +14,6 @@ import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 import swarm.server.domains.Breakpoint;
-import swarm.server.domains.Product;
 import swarm.server.domains.Task;
 import swarm.server.domains.Type;
 import swarm.server.repositories.BreakpointRepository;
@@ -48,18 +47,17 @@ public class TaskService {
 		return taskRepository.findById(id);
 	}
 
-	@GraphQLMutation
-	public Task createTask(@GraphQLArgument(name = "product") Product product, @GraphQLArgument(name = "title") String title,
-			@GraphQLArgument(name = "url") String url, @GraphQLArgument(name = "color") String color) {
-		return taskRepository.save(new Task(product, title, url, color));
+	@GraphQLMutation(name = "taskCreate")
+	public Task taskCreate(Task task) {
+		return taskRepository.save(task);
 	}
 	
-	@GraphQLQuery
+	@GraphQLQuery(name = "tasks")
     public Iterable<Task> allTasks() {
         return taskRepository.findAll();
     }
 	
-	@GraphQLQuery
+	@GraphQLQuery(name = "tasks")
 	public Iterable<Task> TasksByDeveloperId(@GraphQLArgument(name = "developerId") Long developerId) {
 		return taskRepository.findByDeveloperId(developerId);
 	}
