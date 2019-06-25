@@ -30,7 +30,7 @@ Using GraphiQL for testing
 
 ![graphiql query](Img/graphql3.gif)
 
-Can also be used with :
+Can also be used with :  
 -[SwarmManager](https://github.com/SwarmDebugging/SwarmManager) Eclipse plug-in  
 -HTTP REST requests at localhost:8080  
 -GraphQL HTTP requests at localhost:8080/graphql? [GraphQL - Serving Over HTTP](https://graphql.org/learn/serving-over-http/)  
