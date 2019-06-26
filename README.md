@@ -34,3 +34,6 @@ Can also be used with :
 -[SwarmManager](https://github.com/SwarmDebugging/SwarmManager) Eclipse plug-in  
 -HTTP REST requests at localhost:8080  
 -GraphQL HTTP requests at localhost:8080/graphql? [GraphQL - Serving Over HTTP](https://graphql.org/learn/serving-over-http/)  
+
+note:
+The databse image included in the docker-compose runs on port 5432, make sure it's not in use.
