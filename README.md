@@ -36,4 +36,4 @@ Can also be used with :
 -GraphQL HTTP requests at localhost:8080/graphql? [GraphQL - Serving Over HTTP](https://graphql.org/learn/serving-over-http/)  
 
 note:
-The databse image included in the docker-compose runs on port 5432, make sure it's not in use.
+The database image included in the docker-compose runs on port 5432, make sure it's not in use.
