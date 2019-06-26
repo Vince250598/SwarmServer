@@ -28,4 +28,9 @@ public class BreakpointRestController {
 		return breakpointService.findById(id);
 	}
 
+	@RequestMapping("/taskBreakpoints/{id}")
+	public Iterable<Breakpoint> getBreakpointByTaskId(@PathVariable Long id) {
+		return breakpointService.breakpointsByTaskId(id);
+	}
+
 }
