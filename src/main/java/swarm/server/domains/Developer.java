@@ -61,6 +61,7 @@ public class Developer implements Serializable{
 		return color;
 	}
 
+	@GraphQLIgnore
 	public void setColor(String color) {
 		this.color = color;
 	}
@@ -69,6 +70,7 @@ public class Developer implements Serializable{
 		return logged;
 	}
 
+	@GraphQLIgnore
 	public void setLogged(boolean logged) {
 		this.logged = logged;
 	}

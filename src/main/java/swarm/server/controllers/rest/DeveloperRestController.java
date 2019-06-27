@@ -19,8 +19,8 @@ public class DeveloperRestController {
 	private DeveloperService developerService; 
 
 	@RequestMapping("/login")
-    public Developer login(String name) {
-		return developerService.login(name);
+    public Developer login(String username) {
+		return developerService.developerByName(username);
     }
 	
 	@PostMapping("/developers")

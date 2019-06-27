@@ -10,17 +10,21 @@ import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 import swarm.server.domains.Developer;
+import swarm.server.domains.Task;
 import swarm.server.repositories.DeveloperRepository;
+import swarm.server.repositories.TaskRepository;
 
 @Service
 @GraphQLApi
 public class DeveloperService {
 
 	private final DeveloperRepository developerRepository; 
+	private final TaskRepository taskRepository;
 
 	@Autowired
-	public DeveloperService(DeveloperRepository developerRepository) {
+	public DeveloperService(DeveloperRepository developerRepository, TaskRepository taskRepository) {
 		this.developerRepository = developerRepository;
+		this.taskRepository = taskRepository;
 	}
 	
 	public Optional<Developer> developerById(Long id) {
@@ -28,8 +32,20 @@ public class DeveloperService {
 	}
 	
 	@GraphQLQuery(name = "developer")
-	public Developer login(@GraphQLArgument(name = "name") String name) {
+	public Developer developerByName(@GraphQLArgument(name = "name") String name) {
 		return developerRepository.findByNameAllIgnoringCase(name);
+	}
+
+	@GraphQLQuery(name = "login")
+	public Iterable<Task> login(@GraphQLArgument(name = "username") String username) {
+		/*Developer developer = developerRepository.findByNameAllIgnoringCase(username);
+		developer.setLogged(true);
+		return developerRepository.save(developer);*/
+
+		Developer developer = developerRepository.findByNameAllIgnoringCase(username);
+		developer.setLogged(true);
+		developerRepository.save(developer);
+		return taskRepository.findByDeveloperId(developer.getId());
 	}
 	
 	@GraphQLQuery(name = "developers")
@@ -43,6 +59,8 @@ public class DeveloperService {
 	
 	@GraphQLMutation(name = "developerCreate")
 	public Developer createDeveloper(Developer developer) {
+		developer.setLogged(true); //does not work
+		developer.setColor("color");
 		return developerRepository.save(developer);
 	}
 }
