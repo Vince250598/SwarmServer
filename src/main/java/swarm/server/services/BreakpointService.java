@@ -57,7 +57,7 @@ public class BreakpointService {
 
 		for (Breakpoint breakpoint : breakpoints) {
 			buffer.append("[\"" + breakpoint.getType().getSession().getTask().getTitle().substring(0, 11) + "\",\n");
-			buffer.append("\"" + breakpoint.getType().getSession().getDeveloper().getName() + "\",\n");
+			buffer.append("\"" + breakpoint.getType().getSession().getDeveloper().getUsername() + "\",\n");
 			buffer.append("\"" + breakpoint.getType().getFullName() + "\",\n");
 			buffer.append("\"" + breakpoint.getLineNumber() + "\"],\n");
 		}

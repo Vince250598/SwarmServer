@@ -22,8 +22,8 @@ public class Developer implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(nullable = false)
-	String name;
+	@Column(nullable = false, unique = true)
+	String username;
 	
 	String color;
 	
@@ -33,8 +33,8 @@ public class Developer implements Serializable{
 	@Transient
 	boolean logged;
 	
-	public Developer(String name, String color) {
-		this.name = name;
+	public Developer(String username, String color) {
+		this.username = username;
 		this.color = color;
 	}
 	
@@ -49,12 +49,12 @@ public class Developer implements Serializable{
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getColor() {
@@ -92,7 +92,7 @@ public class Developer implements Serializable{
 
     @Override
     public String toString() {
-		return id + ": " + name;
+		return id + ": " + username;
 	}
 
 }
