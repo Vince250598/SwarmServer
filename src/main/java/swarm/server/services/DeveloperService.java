@@ -32,8 +32,8 @@ public class DeveloperService {
 	}
 	
 	@GraphQLQuery(name = "developer")
-	public Developer developerByName(@GraphQLArgument(name = "name") String name) {
-		return developerRepository.findByNameAllIgnoringCase(name);
+	public Developer developerByUsername(@GraphQLArgument(name = "username") String username) {
+		return developerRepository.findByUsernameAllIgnoringCase(username);
 	}
 
 	@GraphQLQuery(name = "login")
@@ -42,7 +42,7 @@ public class DeveloperService {
 		developer.setLogged(true);
 		return developerRepository.save(developer);*/
 
-		Developer developer = developerRepository.findByNameAllIgnoringCase(username);
+		Developer developer = developerRepository.findByUsernameAllIgnoringCase(username);
 		developer.setLogged(true);
 		developerRepository.save(developer);
 		return taskRepository.findByDeveloperId(developer.getId());

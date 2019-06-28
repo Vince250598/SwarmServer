@@ -118,7 +118,7 @@ public class TaskService {
 
 			List<Breakpoint> breakpoints = breakpointRepository.findByTaskAndType(task, key);
 			for(Breakpoint breakpoint : breakpoints) {
-				String devName = breakpoint.getType().getSession().getDeveloper().getName();
+				String devName = breakpoint.getType().getSession().getDeveloper().getUsername();
 
 				//int hash = breakpoint.getType().getSession().getDeveloper().getName().hashCode();
 				//int r = (hash & 0xFF0000) >> 16;

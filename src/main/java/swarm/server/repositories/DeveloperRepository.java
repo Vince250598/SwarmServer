@@ -14,8 +14,8 @@ import swarm.server.domains.Developer;
 public interface DeveloperRepository extends JpaRepository<Developer, Long> {
 	Optional<Developer> findById(@Param("id") Long id);
 	
-	Developer findByNameAllIgnoringCase(@Param("name") String name);
+	Developer findByUsernameAllIgnoringCase(@Param("username") String username);
 
-	Page<Developer> findByName(@Param("name") String name, Pageable pageable);
+	Page<Developer> findByUsername(@Param("username") String username, Pageable pageable);
 
 }
