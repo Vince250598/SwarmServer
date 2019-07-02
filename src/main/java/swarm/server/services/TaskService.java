@@ -16,7 +16,6 @@ import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 import swarm.server.domains.Breakpoint;
 import swarm.server.domains.Task;
 import swarm.server.domains.Type;
-import swarm.server.domains.Product;
 import swarm.server.repositories.BreakpointRepository;
 import swarm.server.repositories.ProductRepository;
 import swarm.server.repositories.TaskRepository;
@@ -53,8 +52,6 @@ public class TaskService {
 
 	@GraphQLMutation(name = "taskCreate")
 	public Task taskCreate(Task task) {
-		Product product = new Product("test");
-		//product management
 		return taskRepository.save(task);
 	}
 	

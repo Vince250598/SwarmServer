@@ -24,7 +24,7 @@ public class TaskRestController {
 		return taskService.TasksByDeveloperId(developerId);
 	}
 	
-	@PostMapping("/tasks") // "/methods" in SwarmManager, strange?
+	@PostMapping("/tasks")
 	public Task newTask(@RequestBody Task task) {
 		return taskService.save(task);
 	}

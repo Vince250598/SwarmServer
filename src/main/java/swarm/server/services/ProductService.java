@@ -44,6 +44,11 @@ public class ProductService {
 	public Product save(Product product) {
 		return productRepository.save(product);
 	}
+
+	@GraphQLQuery(name = "products")
+	public Iterable<Product> products(Long developerId) {
+		return productRepository.findByDeveloperId(developerId);
+	}
 	
 	@GraphQLMutation(name = "productCreate")
 	public Product createProduct(Product product) {
