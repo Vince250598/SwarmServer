@@ -45,7 +45,7 @@ public class DeveloperService {
 		Developer developer = developerRepository.findByUsernameAllIgnoringCase(username);
 		developer.setLogged(true);
 		developerRepository.save(developer);
-		return taskRepository.findByDeveloperId(developer.getId());
+		return taskRepository.findByDeveloperId(developer.getId()); //finds tasks
 	}
 	
 	@GraphQLQuery(name = "developers")

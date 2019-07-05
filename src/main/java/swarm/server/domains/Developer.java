@@ -33,9 +33,8 @@ public class Developer implements Serializable{
 	@Transient
 	boolean logged;
 	
-	public Developer(String username, String color) {
+	public Developer(String username) {
 		this.username = username;
-		this.color = color;
 	}
 	
 	public Developer() {}

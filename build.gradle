@@ -16,7 +16,6 @@ buildscript {
 
 plugins {
 	id 'java'
-	id 'eclipse'
 	id 'com.gradle.build-scan' version '2.3'
 	id 'org.springframework.boot' version '2.1.5.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.7.RELEASE'
@@ -69,6 +68,7 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')     
     testCompile("junit:junit")
     testCompile("com.jayway.jsonpath:json-path:2.4.0")
+	testCompile('com.h2database:h2')
     
     runtime('org.postgresql:postgresql:42.2.5')
     
