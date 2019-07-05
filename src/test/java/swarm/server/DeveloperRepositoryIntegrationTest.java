@@ -37,4 +37,17 @@ public class DeveloperRepositoryIntegrationTest {
 
     }
 
+    @Test
+    public void whenSaveDeveloper_thenReturnDeveloper() {
+
+        Developer Bob = new Developer("Bob");
+        entityManager.persist(Bob);
+        entityManager.flush();
+
+        Developer created = developerRepository.save(Bob);
+
+        assertEquals(Bob.getUsername(), created.getUsername());
+
+    }
+
 }

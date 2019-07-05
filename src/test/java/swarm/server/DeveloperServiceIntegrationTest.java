@@ -1,30 +1,19 @@
 package swarm.server;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.context.annotation.Bean;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import swarm.server.domains.Developer;
 import swarm.server.repositories.DeveloperRepository;
 import swarm.server.services.DeveloperService;
 
-
+//@RunWith(MockitoJUnitRunner.class)
 public class DeveloperServiceIntegrationTest {
 
     @Mock
@@ -46,4 +35,15 @@ public class DeveloperServiceIntegrationTest {
 
         assertEquals("Bob", dev.getUsername());
     }
+
+    /*@Test TODO:FIX
+    public void whenCreateDeveloper_thenReturnDeveloper() {
+        Developer Bob = new Developer();
+        Bob.setUsername("Bob");
+        when(developerRepository.save(any(Developer.class))).thenReturn(new Developer());
+
+        Developer dev = developerService.createDeveloper(Bob);
+
+        assertEquals("Bob", dev.getUsername());
+    }*/
 }

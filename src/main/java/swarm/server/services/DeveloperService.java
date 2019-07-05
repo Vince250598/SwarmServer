@@ -59,7 +59,7 @@ public class DeveloperService {
 	
 	@GraphQLMutation(name = "developerCreate")
 	public Developer createDeveloper(Developer developer) {
-		developer.setLogged(true); //does not work
+		//developer.setLogged(true); //does not work
 		developer.setColor("color");
 		return developerRepository.save(developer);
 	}
