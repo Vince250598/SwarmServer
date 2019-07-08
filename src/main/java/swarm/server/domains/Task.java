@@ -36,11 +36,10 @@ public class Task implements Serializable{
 	
 	public Task () {}
 	
-	public Task(Product product, String title, String url, String color) {
+	public Task(Product product, String title, String url) {
 		this.product = product;
 		this.title = title;
 		this.url = url;
-		this.color = color;
 	}
 
 	public Long getId() {
