@@ -17,7 +17,6 @@ import swarm.server.domains.Breakpoint;
 import swarm.server.domains.Task;
 import swarm.server.domains.Type;
 import swarm.server.repositories.BreakpointRepository;
-import swarm.server.repositories.ProductRepository;
 import swarm.server.repositories.TaskRepository;
 import swarm.server.repositories.TypeRepository;
 
@@ -31,15 +30,13 @@ public class TaskService {
 	private final TaskRepository taskRepository;
 	private final TypeRepository typeRepository;
 	private final BreakpointRepository breakpointRepository;
-	private final ProductRepository productRepository;
 	
 	@Autowired
 	public TaskService(TaskRepository taskRepository, TypeRepository typeRepository,
-			BreakpointRepository breakpointRepository, ProductRepository productRepository) {
+			BreakpointRepository breakpointRepository) {
 		this.taskRepository = taskRepository;
 		this.typeRepository = typeRepository;
 		this.breakpointRepository = breakpointRepository;
-		this.productRepository = productRepository;
 	}
 	
 	public Task save(Task task) {

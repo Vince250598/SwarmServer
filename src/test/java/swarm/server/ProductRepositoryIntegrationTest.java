@@ -52,11 +52,15 @@ public class ProductRepositoryIntegrationTest {
         Session session = new Session();
         session.setDeveloper(developer);
         session.setTask(task);
+        testEntityManager.persist(session);
+        testEntityManager.flush();
 
         Iterable<Product> found = productRepository.findByDeveloperId(developer.getId());
 
+        int i = 0;
         for (Product pro : found) {
-            assertEquals(productList.get(0), pro);
+            assertEquals(productList.get(i), pro); 
+            i++;
         }
 
     }

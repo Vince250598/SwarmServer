@@ -36,7 +36,7 @@ public class DeveloperServiceIntegrationTest {
         assertEquals("Bob", dev.getUsername());
     }
 
-    /*@Test TODO:FIX
+    /*@Test
     public void whenCreateDeveloper_thenReturnDeveloper() {
         Developer Bob = new Developer();
         Bob.setUsername("Bob");
