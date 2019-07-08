@@ -38,6 +38,11 @@ public class TaskService {
 		this.typeRepository = typeRepository;
 		this.breakpointRepository = breakpointRepository;
 	}
+
+	@GraphQLQuery(name = "tasks") //TODO
+	public Iterable<Task> taskByProductId(@GraphQLArgument(name = "productId") Long productId) {
+		return taskRepository.findByProductId(productId);
+	}
 	
 	public Task save(Task task) {
 		return taskRepository.save(task);
