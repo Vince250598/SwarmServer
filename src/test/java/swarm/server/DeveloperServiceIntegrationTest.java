@@ -1,6 +1,8 @@
 package swarm.server;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import org.junit.Before;
@@ -36,11 +38,11 @@ public class DeveloperServiceIntegrationTest {
         assertEquals("Bob", dev.getUsername());
     }
 
-    /*@Test
+    /*@Test //TODO
     public void whenCreateDeveloper_thenReturnDeveloper() {
-        Developer Bob = new Developer();
-        Bob.setUsername("Bob");
-        when(developerRepository.save(any(Developer.class))).thenReturn(new Developer());
+        Developer Bob = mock(Developer.class);
+        //Bob.setUsername("Bob");
+        doReturn(Developer.class).when(developerRepository).save(Bob);
 
         Developer dev = developerService.createDeveloper(Bob);
 

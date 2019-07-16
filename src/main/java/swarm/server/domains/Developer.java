@@ -43,7 +43,6 @@ public class Developer implements Serializable{
 		return id;
 	}
 
-	@GraphQLIgnore
 	public void setId(Long id) {
 		this.id = id;
 	}

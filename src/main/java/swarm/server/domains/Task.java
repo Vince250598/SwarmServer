@@ -46,7 +46,6 @@ public class Task implements Serializable{
 		return id;
 	}
 
-	@GraphQLIgnore
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -79,6 +78,7 @@ public class Task implements Serializable{
 		return color;
 	}
 
+	@GraphQLIgnore
 	public void setColor(String color) {
 		this.color = color;
 	}
