@@ -9,7 +9,7 @@ import swarm.server.domains.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    @Query("Select p from Product p, Task t, Session s where t.product.id = p.id and s.task.id = t.id and s.developer.id = :developerId")
+    @Query("Select distinct p from Product p, Task t, Session s where t.product.id = p.id and s.task.id = t.id and s.developer.id = :developerId")
     Iterable<Product> findByDeveloperId(@Param("developerId") Long developerId);
 
 }
