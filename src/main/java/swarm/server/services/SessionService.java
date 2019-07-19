@@ -1,5 +1,6 @@
 package swarm.server.services;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -71,8 +72,10 @@ public class SessionService {
 		return sessionRepository.save(session);
 	}
 
-	@GraphQLMutation(name = "sessionCreate") //started and finished necessary?
-	public Session createSession(Session session) {
+	@GraphQLMutation(name = "sessionStart") //started and finished necessary?
+	public Session sessionStart(Session session) {
+		Date date = new Date();
+		session.setStarted(new Timestamp(date.getTime()));
 		return sessionRepository.save(session);
 	}
 	
