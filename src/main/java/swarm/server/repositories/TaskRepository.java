@@ -15,5 +15,8 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 	List<Task> findByDeveloperId(@Param("id") Long id);
 
 	Iterable<Task> findByProductId(Long id);
+
+	@Query("Select distinct s.task from Session s where s.developer.id = :id and s.task.done = false")
+	List<Task> findActiveTasksByDeveloperId(@Param("id") Long id);
 	
 }

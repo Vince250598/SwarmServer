@@ -30,6 +30,8 @@ public class Task implements Serializable{
 	String url;
 	
 	String color;
+
+	boolean done;
 	
 	@Column(name="CREATION_TS", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable=false, updatable=false)
 	private Calendar timestamp;
@@ -40,6 +42,7 @@ public class Task implements Serializable{
 		this.product = product;
 		this.title = title;
 		this.url = url;
+		done = false;
 	}
 
 	public Long getId() {
@@ -76,6 +79,15 @@ public class Task implements Serializable{
 
 	public String getColor() {
 		return color;
+	}
+
+	@GraphQLIgnore
+	public void setDone(boolean done) {
+		this.done = done;
+	}
+
+	public boolean getDone() {
+		return done;
 	}
 
 	@GraphQLIgnore

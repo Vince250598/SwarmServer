@@ -1,5 +1,6 @@
 package swarm.server.services;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,7 +44,15 @@ public class TaskService {
 	public Iterable<Task> taskByProductId(@GraphQLArgument(name = "productId") Long productId) {
 		return taskRepository.findByProductId(productId);
 	}
-	
+
+	@GraphQLMutation(name = "taskDone")
+	public Task taskDone(@GraphQLArgument(name = "taskId") long taskId) {
+		Optional<Task> task = taskRepository.findById(taskId);
+
+		task.get().setDone(true);
+		return taskRepository.save(task.get());
+	}
+
 	public Task save(Task task) {
 		return taskRepository.save(task);
 	}
@@ -65,6 +74,11 @@ public class TaskService {
 	@GraphQLQuery(name = "tasks")
 	public Iterable<Task> TasksByDeveloperId(@GraphQLArgument(name = "developerId") Long developerId) {
 		return taskRepository.findByDeveloperId(developerId);
+	}
+
+	@GraphQLQuery(name = "tasksActive")
+	public List<Task> activeTasks(@GraphQLArgument(name = "developerId") Long developerId) {
+		return taskRepository.findActiveTasksByDeveloperId(developerId);
 	}
 	
 	@GraphQLQuery(name = "getBreakpointGraphData")
