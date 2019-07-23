@@ -37,8 +37,8 @@ public class TaskServiceIntegrationTest {
         Product product = new Product("product");
 
         List<Task> taskList = new ArrayList<Task>();
-        taskList.add(new Task(product, "title", "url"));
-        taskList.add(new Task(product, "title2", "url2"));
+        taskList.add(new Task(product, "title", "url", false));
+        taskList.add(new Task(product, "title2", "url2", false));
 
         when(taskRepository.findByProductId(1L)).thenReturn(taskList);
 

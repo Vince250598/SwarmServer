@@ -38,11 +38,11 @@ public class Task implements Serializable{
 	
 	public Task () {}
 	
-	public Task(Product product, String title, String url) {
+	public Task(Product product, String title, String url, boolean done) {
 		this.product = product;
 		this.title = title;
 		this.url = url;
-		done = false;
+		this.done = done;
 	}
 
 	public Long getId() {
@@ -81,7 +81,6 @@ public class Task implements Serializable{
 		return color;
 	}
 
-	@GraphQLIgnore
 	public void setDone(boolean done) {
 		this.done = done;
 	}

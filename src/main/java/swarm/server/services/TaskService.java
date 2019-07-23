@@ -77,8 +77,15 @@ public class TaskService {
 	}
 
 	@GraphQLQuery(name = "tasksActive")
-	public List<Task> activeTasks(@GraphQLArgument(name = "developerId") Long developerId) {
-		return taskRepository.findActiveTasksByDeveloperId(developerId);
+	public List<Task> activeTasks(@GraphQLArgument(name = "developerId") Long developerId, @GraphQLArgument(name = "productId") Long productId) {
+
+		if(developerId != null){
+			return taskRepository.findActiveTasksByDeveloperId(developerId);
+		} else if(productId != null) {
+			return taskRepository.findActiveTasksByProductId(productId);
+		} else {
+			return taskRepository.findActiveTasksByDeveloperIdAndProductId(developerId, productId);
+		}
 	}
 	
 	@GraphQLQuery(name = "getBreakpointGraphData")
