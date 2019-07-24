@@ -1,4 +1,4 @@
-package swarm.server;
+/*package swarm.server;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,4 +20,4 @@ public class SessionRepositoryIntegrationTest {
 
     @Autowired
     private SessionRepository sessionRepository;
-}
+}*/
