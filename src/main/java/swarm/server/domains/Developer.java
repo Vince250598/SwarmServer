@@ -30,6 +30,7 @@ public class Developer implements Serializable{
 	@Column(name="CREATION_TS", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable=false, updatable=false)
 	private Calendar timestamp;
 	
+	//Why is this transient???
 	@Transient
 	boolean logged;
 	
