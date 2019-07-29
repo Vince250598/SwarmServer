@@ -27,6 +27,7 @@ public class Task implements Serializable{
 	
 	String title;
 	
+	//What does that represent?
 	String url;
 	
 	String color;

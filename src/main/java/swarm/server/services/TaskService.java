@@ -64,6 +64,16 @@ public class TaskService {
 	public Task taskCreate(Task task) {
 		return taskRepository.save(task);
 	}
+
+	@GraphQLMutation(name = "taskUpdate")
+	public Task taskUpdateTitle(@GraphQLArgument(name = "taskId") Long taskId, @GraphQLArgument(name = "title") String title) {
+		Task task = taskRepository.findById(taskId).orElse(null);
+		if(task != null) {
+			task.setTitle(title);
+			return taskRepository.save(task);
+		}
+		return null;
+	}
 	
 	@GraphQLQuery(name = "tasks")
     public Iterable<Task> allTasks() {
