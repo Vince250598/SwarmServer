@@ -49,7 +49,20 @@ public class TaskServiceIntegrationTest {
             assertEquals(taskList.get(i), task);
             i++;
         }
+    }
 
+    @Test
+    public void whenTaskUpdateTitle_thenReturnTask() {
+
+        Task task = new Task();
+        task.setId(1L);
+        task.setTitle("title");
+
+        when(taskRepository.save(task)).thenReturn(task);
+
+        Task saved = taskService.taskUpdateTitle(1L, "title");
+
+        assertEquals(task, saved);
     }
 
 
