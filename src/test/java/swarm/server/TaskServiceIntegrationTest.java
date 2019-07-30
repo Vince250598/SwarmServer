@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,10 +55,13 @@ public class TaskServiceIntegrationTest {
     @Test
     public void whenTaskUpdateTitle_thenReturnTask() {
 
-        Task task = new Task();
-        task.setId(1L);
-        task.setTitle("title");
+        Optional<Task> task;
+        Task taskk = new Task();
+        taskk.setId(1L);
+        taskk.setTitle("title");
+        task = taskk;
 
+        when(taskRepository.findById(1L)).thenReturn(task);
         when(taskRepository.save(task)).thenReturn(task);
 
         Task saved = taskService.taskUpdateTitle(1L, "title");
