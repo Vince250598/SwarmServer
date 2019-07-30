@@ -52,4 +52,25 @@ public class SessionServiceIntegrationTest {
         
         assertEquals(session, updated);
     }
+
+    @Test
+    public void whenSessionStart_thenReturnSession() {
+
+        Product product = new Product("name");
+
+        Task task = new Task(product, "title", "url", false);
+
+        Developer developer = new Developer("Username");
+
+        Session session = new Session(developer, task, "description", "label", "purpose", "project");
+
+        when(sessionRepository.save(session)).thenReturn(session);
+
+        Session started = sessionService.sessionStart(session);
+
+        assertEquals(session, started);
+    }
+
+
+
 }

@@ -43,7 +43,18 @@ public class ProductServiceIntegrationTest {
             assertEquals(productList.get(i), pro);
             i++;
         }
+    }
 
+    @Test
+    public void whenProductCreate_thenReturnProduct() {
+
+        Product product = new Product("bla");
+
+        when(productRepository.save(product)).thenReturn(product);
+
+        Product saved = productService.createProduct(product);
+
+        assertEquals(product, saved);
     }
 
 }
