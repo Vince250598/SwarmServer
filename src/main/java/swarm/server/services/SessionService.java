@@ -52,7 +52,7 @@ public class SessionService {
 		return sessionRepository.findAll();
 	}
 	
-	public Iterable<Optional<Session>> sessionsByTaskId(Long taskId) {
+	public Iterable<Session> sessionsByTaskId(Long taskId) {
 		return sessionRepository.findByTask(taskId);
 	}
 	
@@ -80,18 +80,18 @@ public class SessionService {
 	}
 	
 	@GraphQLQuery(name = "sessions")
-	public Iterable<Optional<Session>> sessionsByTaskIdAndDeveloperId(@GraphQLArgument(name = "taskId") Long taskId, @GraphQLArgument(name = "developerId") Long developerId){
+	public Iterable<Session> sessionsByTaskIdAndDeveloperId(@GraphQLArgument(name = "taskId") Long taskId, @GraphQLArgument(name = "developerId") Long developerId){
     	return sessionRepository.findByTaskAndDeveloper(taskId, developerId);
     }
 
-	@GraphQLQuery(name = "getGraphData")
+	/*@GraphQLQuery(name = "getGraphData")
     public String getGraphData(@GraphQLArgument(name = "sessionId") Long sessionId, @GraphQLArgument(name = "addType") boolean addType) {
 		Optional<Session> session = sessionRepository.findById(sessionId);
 		return getGraphData(session, addType, true);
 	}
 	
 	
-	public String getGraphData(Optional<Session> session, boolean addType, boolean closed) {
+	public String getGraphData(Session session, boolean addType, boolean closed) {
 		graph = new StringBuffer();		
 		if(closed) { 
 			graph.append("[");
@@ -371,11 +371,11 @@ public class SessionService {
 	public String getGraphDataByTaskId(@GraphQLArgument(name = "taskId") Long taskId) {
 		String graph = "[";
 		
-		Iterable<Optional<Session>> sessions = sessionRepository.findByTask(taskId);
-		for (Optional<Session> session : sessions) {
+		Iterable<Session> sessions = sessionRepository.findByTask(taskId);
+		for (Session session : sessions) {
 			graph += getGraphData(session, false, false);
 		}
 		
 		return graph + "]";
-	}
+	}*/
 }

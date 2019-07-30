@@ -59,14 +59,14 @@ public class TaskServiceIntegrationTest {
         Task taskk = new Task();
         taskk.setId(1L);
         taskk.setTitle("title");
-        task = taskk;
+        task = Optional.of(taskk);
 
         when(taskRepository.findById(1L)).thenReturn(task);
-        when(taskRepository.save(task)).thenReturn(task);
+        when(taskRepository.save(task.get())).thenReturn(task.get());
 
         Task saved = taskService.taskUpdateTitle(1L, "title");
 
-        assertEquals(task, saved);
+        assertEquals(taskk, saved);
     }
 
 

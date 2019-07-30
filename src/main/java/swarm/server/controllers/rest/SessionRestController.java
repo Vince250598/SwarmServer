@@ -26,7 +26,7 @@ public class SessionRestController {
 	private MethodService methodService;
 	
 	@RequestMapping("/sessions/find")
-    public Iterable<Optional<Session>> findSessionsByTaskIdAndDeveloperId(Long taskId, Long developerId) {
+    public Iterable<Session> findSessionsByTaskIdAndDeveloperId(Long taskId, Long developerId) {
 		if(developerId == null) {
 			return sessionService.sessionsByTaskId(taskId);
 		} else {
@@ -39,7 +39,7 @@ public class SessionRestController {
 		return sessionService.sessionById(id);
 	}
 	
-	@RequestMapping("/sessions/graph")
+	/*@RequestMapping("/sessions/graph")
     public String getGraphData(Long sessionId, boolean addType) {
 		return sessionService.getGraphData(sessionId, addType);
     }
@@ -57,7 +57,7 @@ public class SessionRestController {
 	@RequestMapping("/sessions/countElements")
     public int countElements(Long sessionId) {
 		return sessionService.countElements(sessionId);
-    }
+    }*/
 
 	@RequestMapping("/sessions/startingMethods")
     public Iterable<Method> getStartingMethods(Long sessionId) {

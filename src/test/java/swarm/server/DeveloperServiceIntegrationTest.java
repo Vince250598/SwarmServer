@@ -36,14 +36,14 @@ public class DeveloperServiceIntegrationTest {
         assertEquals("Bob", dev.getUsername());
     }
 
-    /*@Test //TODO
+    @Test
     public void whenCreateDeveloper_thenReturnDeveloper() {
-        Developer Bob = mock(Developer.class);
-        //Bob.setUsername("Bob");
-        doReturn(Developer.class).when(developerRepository).save(Bob);
+        Developer Bob = new Developer("Bob");
 
-        Developer dev = developerService.createDeveloper(Bob);
+        when(developerRepository.save(Bob)).thenReturn(Bob);
 
-        assertEquals("Bob", dev.getUsername());
-    }*/
+        Developer saved = developerService.createDeveloper(Bob);
+
+        assertEquals(Bob, saved);
+    }
 }
