@@ -18,5 +18,4 @@ public class EventRestController {
 	public Event newEvent(@RequestBody Event event) {
 		return eventService.save(event);
 	}
-
 }

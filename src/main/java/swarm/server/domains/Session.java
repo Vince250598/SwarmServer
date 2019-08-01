@@ -144,5 +144,4 @@ public class Session implements Serializable{
     public String toString() {
 		return id + ": " + description;
 	}
-	
 }

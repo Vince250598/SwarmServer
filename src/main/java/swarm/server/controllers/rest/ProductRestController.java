@@ -37,5 +37,4 @@ public class ProductRestController {
 	public String graphByProduct(Long productId) {
 		return productService.getProductPaths(productId);
 	}
-
 }

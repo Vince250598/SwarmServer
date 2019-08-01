@@ -34,7 +34,6 @@ public class DeveloperRepositoryIntegrationTest {
         Developer found = developerRepository.findByUsernameAllIgnoringCase(Bob.getUsername());
 
         assertEquals(Bob, found);
-
     }
 
     @Test
@@ -47,7 +46,5 @@ public class DeveloperRepositoryIntegrationTest {
         Developer created = developerRepository.save(Bob);
 
         assertEquals(Bob.getUsername(), created.getUsername());
-
     }
-
 }

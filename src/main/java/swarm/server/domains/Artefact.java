@@ -82,5 +82,4 @@ public class Artefact implements Serializable{
 	public void setTypeHash(int typeHash) {
 		this.typeHash = typeHash;
 	}
-
 }

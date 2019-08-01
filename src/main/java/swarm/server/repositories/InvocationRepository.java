@@ -31,8 +31,6 @@ public interface InvocationRepository extends JpaRepository<Invocation, Long> {
 	@Query("from Invocation as i where i.session.task = :task order by i.id")
 	List<Invocation> findBySession(@Param("task") Task task);
 	
-	
 	@Query("from Invocation as i Where i.session.task.product = :product")
 	List<Invocation> findByProduct(@Param("product") Optional<Product> product);
-	
 }

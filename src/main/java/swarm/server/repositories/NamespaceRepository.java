@@ -12,5 +12,4 @@ import swarm.server.domains.Namespace;
 public interface NamespaceRepository extends JpaRepository<Namespace, Long> {
 
 	Optional<Namespace> findByFullPath(@Param("fullPath") String fullPath);
-
 }

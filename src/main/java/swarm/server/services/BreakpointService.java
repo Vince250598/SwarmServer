@@ -66,5 +66,4 @@ public class BreakpointService {
 		output = output + "\n]}";
         return output;
 	}
-	
 }

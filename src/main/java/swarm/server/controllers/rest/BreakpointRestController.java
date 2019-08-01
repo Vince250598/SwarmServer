@@ -32,5 +32,4 @@ public class BreakpointRestController {
 	public Iterable<Breakpoint> getBreakpointByTaskId(@PathVariable Long id) {
 		return breakpointService.breakpointsByTaskId(id);
 	}
-
 }

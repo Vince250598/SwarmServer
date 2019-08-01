@@ -130,5 +130,4 @@ public class Type implements Serializable{
     public String toString() {
 		return id + ": " + fullName;
 	}
-	
 }

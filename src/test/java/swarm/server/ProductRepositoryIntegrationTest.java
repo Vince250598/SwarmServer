@@ -62,7 +62,5 @@ public class ProductRepositoryIntegrationTest {
             assertEquals(productList.get(i), pro); 
             i++;
         }
-
     }
-
 }

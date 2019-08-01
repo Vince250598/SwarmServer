@@ -17,5 +17,4 @@ public interface DeveloperRepository extends JpaRepository<Developer, Long> {
 	Developer findByUsernameAllIgnoringCase(@Param("username") String username);
 
 	Page<Developer> findByUsername(@Param("username") String username, Pageable pageable);
-
 }

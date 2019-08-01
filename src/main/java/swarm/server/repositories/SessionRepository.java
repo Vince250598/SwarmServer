@@ -1,7 +1,5 @@
 package swarm.server.repositories;
 
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,5 +15,4 @@ public interface SessionRepository extends JpaRepository<Session, Long> {
 	
 	@Query("Select s from Session s Where task.id = :taskId")
 	Iterable<Session> findByTask(@Param("taskId") Long taskId);
-	
 }

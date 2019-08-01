@@ -30,5 +30,4 @@ public interface MethodRepository extends JpaRepository<Method, Long> {
 	@Query("select m from Method m, Type t, Session s where m.type = t and t.session = s and s = :session " +
 		   "and m not in (select i.invoking from Invocation i group by i.invoking) order by m.id")
 	List<Method> getEndingMethods(@Param("session") Optional<Session> session);
-
 }

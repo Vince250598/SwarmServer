@@ -93,5 +93,4 @@ public class Developer implements Serializable{
     public String toString() {
 		return id + ": " + username;
 	}
-
 }

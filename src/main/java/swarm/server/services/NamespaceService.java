@@ -41,5 +41,4 @@ public class NamespaceService {
 	public Optional<Namespace> namespace(@GraphQLArgument(name = "fullPath") String fullPath) {
 		return namespaceRepository.findByFullPath(fullPath);
 	}
-	
 }

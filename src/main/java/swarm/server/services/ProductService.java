@@ -92,13 +92,11 @@ public class ProductService {
 					String key = invocation.getSession().getTask().getId() + "-" + invocation.getInvoking().getType().getFullName() + "->" + invocation.getInvoked().getType().getFullName(); 
 					labels.put(key,(labels.get(key) != null ? labels.get(key) : "") + (i+1) + ",");
 				}
-	
 
 				for (Invocation invocation : invocations) {
 					String key = invocation.getSession().getTask().getId() + "-" + invocation.getInvoking().getType().getFullName() + "->" + invocation.getInvoked().getType().getFullName();
 					countI.put(key, countI.get(key) !=  null ? countI.get(key) + 1 : 1);
 				}
-				
 				
 				for (Invocation invocation : invocations) {
 					if(!invocation.getInvoking().getType().getFullName().equals(invocation.getInvoked().getType().getFullName())) {
@@ -134,5 +132,4 @@ public class ProductService {
 
 		return output;	
 	}
-
 }

@@ -13,5 +13,4 @@ public class GeneralService {
 	public String health() {
 		return "UP";
 	}
-
 }
