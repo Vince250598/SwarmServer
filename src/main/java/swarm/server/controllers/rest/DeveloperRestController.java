@@ -37,5 +37,4 @@ public class DeveloperRestController {
 	public Iterable<Developer> allDevelopers() {
 		return developerService.allDevelopers();
 	}
-	
 }

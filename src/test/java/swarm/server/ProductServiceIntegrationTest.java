@@ -56,5 +56,4 @@ public class ProductServiceIntegrationTest {
 
         assertEquals(product, saved);
     }
-
 }

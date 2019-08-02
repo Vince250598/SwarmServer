@@ -35,5 +35,4 @@ public interface BreakpointRepository extends JpaRepository<Breakpoint, Long> {
 	
 	@Query("Select b from Breakpoint b Where b.type.session.task.product = :product order by b.lineNumber")
 	List<Breakpoint> findByProduct(@Param("product") Optional<Product> product);
-
 }

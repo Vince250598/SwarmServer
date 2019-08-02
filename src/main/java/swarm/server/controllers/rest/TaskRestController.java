@@ -44,5 +44,4 @@ public class TaskRestController {
 		task.setId(id);
 		return taskService.save(task);
 	}
-	
 }

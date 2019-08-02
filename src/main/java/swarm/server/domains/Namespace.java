@@ -81,5 +81,4 @@ public class Namespace implements Serializable{
 	public void setFullPath(String fullPath) {
 		this.fullPath = fullPath;
 	}
-
 }

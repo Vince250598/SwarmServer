@@ -32,5 +32,4 @@ public class NamespaceRestController {
 	public Optional<Namespace> namespaceById(@PathVariable Long id) {
 		return namespaceService.namespace(id);
 	}
-	
 }

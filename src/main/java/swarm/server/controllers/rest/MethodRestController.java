@@ -27,12 +27,9 @@ public class MethodRestController {
 	public Method newMethod(@RequestBody Method method) {
 		return methodService.save(method);
 	}
-	
-	//service/MethodService.java -> populate server.get?
-	
+		
 	@RequestMapping("/methods/{id}")
 	public Optional<Method> getById(@PathVariable Long id) {
 		return methodService.methodById(id);
 	}
-	
 }

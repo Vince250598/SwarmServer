@@ -25,5 +25,4 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
 	@Query("Select distinct t from Task t where t.product.id = :id and t.done = false")
 	List<Task> findActiveTasksByProductId(@Param("id") Long id);
-	
 }

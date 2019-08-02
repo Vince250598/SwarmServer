@@ -6,7 +6,4 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import swarm.server.domains.Event;
 
 @RepositoryRestResource(collectionResourceRel = "events", path = "events")
-public interface EventRepository extends JpaRepository<Event, Long> {
-
-
-}
+public interface EventRepository extends JpaRepository<Event, Long> {}

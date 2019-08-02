@@ -107,5 +107,4 @@ public class Invocation implements Serializable{
 	public String toString() {
 		return invoking.getId() + ": " + invoking.getKey() + " -> " + invoked.getId() + ": " + invoked.getKey();
 	}
-	
 }

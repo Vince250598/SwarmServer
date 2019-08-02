@@ -38,5 +38,4 @@ public class TypeRestController {
 	public Optional<Type> typeById(@PathVariable Long id) {
 		return typeService.typeById(id);
 	}
-	
 }

@@ -137,5 +137,4 @@ public class Event implements Serializable{
     public String toString() {
 		return id + ": " + detail;
 	}
-	
 }

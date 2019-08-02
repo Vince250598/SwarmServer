@@ -8,5 +8,4 @@ import swarm.server.domains.Artefact;
 public interface ArtefactRepository extends JpaRepository<Artefact, Long> {
 	
 	Artefact findByTypeHash(int typeHash);
-	
 }

@@ -3,7 +3,8 @@ package swarm.server;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-import java.sql.Date;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 
 import org.junit.Before;
@@ -46,7 +47,8 @@ public class SessionServiceIntegrationTest {
         when(sessionRepository.findById(session.getId())).thenReturn(Optional.of(session));
         when(sessionRepository.save(session)).thenReturn(session);
 
-        Date date = new Date(2015, 05, 25);
+        Calendar calendar = Calendar.getInstance();
+        Date date = calendar.getTime();
 
         Session updated = sessionService.updateSession(session.getId(), date, date);
         
@@ -70,7 +72,4 @@ public class SessionServiceIntegrationTest {
 
         assertEquals(session, started);
     }
-
-
-
 }
