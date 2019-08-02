@@ -25,10 +25,10 @@ public class Breakpoint implements Serializable{
 	@ManyToOne(optional = false)
 	private Type type;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	String charStart;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	String charEnd;
 	
 	@Column(nullable = false)

@@ -22,7 +22,7 @@ public class Type implements Serializable{
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 	
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	private Namespace namespace;
 	
 	@ManyToOne(optional = false)
@@ -58,7 +58,6 @@ public class Type implements Serializable{
 		return id;
 	}
 
-	@GraphQLIgnore
 	public void setId(Long id) {
 		this.id = id;
 	}
