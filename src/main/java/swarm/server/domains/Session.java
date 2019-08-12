@@ -34,6 +34,8 @@ public class Session implements Serializable{
 	String purpose;
 	
 	String project;
+
+	String vscodeSession;
 	
 	@Column(name="CREATION_TS", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable=false, updatable=false)
 	private Calendar timestamp;
@@ -123,6 +125,14 @@ public class Session implements Serializable{
 
 	public void setFinished(Date finished) {
 		this.finished = finished;
+	}
+
+	public void setVscodeSession(String vscodeSession) {
+		this.vscodeSession = vscodeSession;
+	}
+
+	public String getVscodeSession() {
+		return vscodeSession;
 	}
     
     @Override

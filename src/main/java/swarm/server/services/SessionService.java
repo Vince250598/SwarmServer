@@ -62,15 +62,21 @@ public class SessionService {
 	
 	@GraphQLMutation(name = "sessionUpdate") //To update started or finished time of sessions
 	public Session updateSession(@GraphQLArgument(name = "id") Long id,
-			@GraphQLArgument(name = "started") Date started, @GraphQLArgument(name = "finished") Date finished ) {
+			@GraphQLArgument(name = "started") Date started, 
+			@GraphQLArgument(name = "finished") Date finished, 
+			@GraphQLArgument(name = "vscodeSession") String vscodeSession) {
 		Session session = sessionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
 		if(started == null) {
 			session.setFinished(finished);
 		}else if (finished == null) {
 			session.setStarted(started);
 		}
+		if (vscodeSession != null){
+			session.setVscodeSession(vscodeSession);
+		}
 		return sessionRepository.save(session);
 	}
+
 
 	@GraphQLMutation(name = "sessionStart") //started and finished necessary?
 	public Session sessionStart(Session session) {
@@ -82,7 +88,12 @@ public class SessionService {
 	@GraphQLQuery(name = "sessions")
 	public Iterable<Session> sessionsByTaskIdAndDeveloperId(@GraphQLArgument(name = "taskId") Long taskId, @GraphQLArgument(name = "developerId") Long developerId){
     	return sessionRepository.findByTaskAndDeveloper(taskId, developerId);
-    }
+	}
+	
+	@GraphQLQuery(name = "sessionsVscode")
+	public Iterable<Session> sessionsByVscodeSession(@GraphQLArgument(name = "vscodeSession") String vscodeSession){
+		return sessionRepository.findByVscode(vscodeSession);
+	}
 
 	/*@GraphQLQuery(name = "getGraphData")
     public String getGraphData(@GraphQLArgument(name = "sessionId") Long sessionId, @GraphQLArgument(name = "addType") boolean addType) {

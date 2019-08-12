@@ -15,4 +15,7 @@ public interface SessionRepository extends JpaRepository<Session, Long> {
 	
 	@Query("Select s from Session s Where task.id = :taskId")
 	Iterable<Session> findByTask(@Param("taskId") Long taskId);
+
+	@Query("Select s from Session s Where vscodeSession = :vscodesession")
+	Iterable<Session> findByVscode(@Param("vscodesession") String vscodeSession);
 }
