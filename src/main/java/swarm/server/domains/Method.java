@@ -25,13 +25,13 @@ public class Method implements Serializable{
 	@ManyToOne(optional = false)
 	private Type type;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	String key;
 
 	@Column(nullable = false)
 	String name;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	String signature;
 	
 	@Column(name="CREATION_TS", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable=false, updatable=false)
