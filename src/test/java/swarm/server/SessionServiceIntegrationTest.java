@@ -50,7 +50,7 @@ public class SessionServiceIntegrationTest {
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
 
-        Session updated = sessionService.updateSession(session.getId(), date, date);
+        Session updated = sessionService.updateSession(session.getId(), date, date, "");
         
         assertEquals(session, updated);
     }
