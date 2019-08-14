@@ -78,5 +78,11 @@ public class TypeService {
 	@GraphQLQuery(name = "types")
 	public Iterable<Type> typesBySessionId(@GraphQLArgument(name = "sessionId") Long sessionId){
     	return typeRepository.findBySessionId(sessionId);
-    }
+	}
+	
+	@GraphQLQuery(name = "allStypes")
+	public Iterable<Type> allTypes() {
+		return typeRepository.findAll();
+	}
+
 }
