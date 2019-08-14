@@ -38,4 +38,10 @@ public class InvocationService {
 			@GraphQLArgument(name = "invokedId") Long invokedId) {
 		return invocationRepository.findByMethods(sessionId, invokingId, invokedId);
 	} 
+
+	@GraphQLQuery(name = "allInvocations")
+	public Iterable<Invocation> allInvocations() {
+		return invocationRepository.findAll();
+	}
+
 }

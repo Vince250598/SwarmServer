@@ -27,4 +27,10 @@ public class EventService {
 	public Event createEvent(Event event) {
 		return eventRepository.save(event);
 	}
+
+	@GraphQLQuery(name = "allEvents")
+	public Iterable<Event> allEvents() {
+		return eventRepository.findAll();
+	}
+
 }
