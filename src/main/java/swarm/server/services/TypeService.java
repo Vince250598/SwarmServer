@@ -80,7 +80,7 @@ public class TypeService {
     	return typeRepository.findBySessionId(sessionId);
 	}
 	
-	@GraphQLQuery(name = "allStypes")
+	@GraphQLQuery(name = "allTypes")
 	public Iterable<Type> allTypes() {
 		return typeRepository.findAll();
 	}
