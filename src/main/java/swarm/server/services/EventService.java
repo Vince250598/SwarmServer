@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.leangen.graphql.annotations.GraphQLMutation;
+import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 import swarm.server.domains.Event;
 import swarm.server.repositories.EventRepository;
@@ -21,6 +22,11 @@ public class EventService {
 	
 	public Event save(Event event) {
 		return eventRepository.save(event);
+	}
+
+	@GraphQLQuery(name = "events")
+	public Iterable<Event> getAllEvents() {
+		return eventRepository.findAll();
 	}
 	
 	@GraphQLMutation(name = "eventCreate")
