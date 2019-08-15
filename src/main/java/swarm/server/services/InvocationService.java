@@ -38,4 +38,9 @@ public class InvocationService {
 		return invocationRepository.findByMethods(sessionId, invokingId, invokedId);
 	} 
 
+	@GraphQLQuery(name = "invocations")
+	public Iterable<Invocation> getAllInvocations() {
+		return invocationRepository.findAll();
+	}
+
 }
